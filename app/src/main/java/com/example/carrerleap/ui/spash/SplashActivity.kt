@@ -9,7 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import com.example.carrerleap.databinding.ActivitySplashBinding
-import com.example.carrerleap.ui.login.LoginActivity
+import com.example.carrerleap.ui.auth.LoginRegisterActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+            val intent = Intent(this@SplashActivity, LoginRegisterActivity::class.java)
             startActivity(intent)
             finish()
         }, 3000)
