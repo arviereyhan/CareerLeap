@@ -2,11 +2,11 @@ import express, { json } from "express";
 import bcrypt, { hash } from "bcrypt";
 import jwt from "jsonwebtoken";
 import connection from "./database.js";
-
-const cors = require("cors");
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const corsOption = {
   origin: ["http://localhost:3000"],
@@ -83,14 +83,19 @@ app.post("/login", (req, res) => {
     "SELECT id, full_name, email, password FROM users WHERE email = ? ",
     [email],
     function (error, results, fields) {
-      // const id = results[0].id;
-      // const username = results[0].full_name;
+      let checkPassword, id, username;
       try {
-        const checkPassword = bcrypt.compareSync(password, results[0].password);
-
-        if (Array.isArray(results) && results.length === 0) {
+        console.log(results, "results");
+        if (results.length !== 0) {
+          checkPassword = bcrypt.compareSync(password, results[0].password);
+          id = results[0].id;
+          username = results[0].full_name;
+        } else {
           return res.status(404).json({ error: "There is no such as email" });
         }
+        console.log(username, "username");
+
+        // if (Array.isArray(results) && results.length === 0) {}
         if (!email || !password) {
           return res
             .status(404)
@@ -110,7 +115,7 @@ app.post("/login", (req, res) => {
           error: false,
           message: "success",
           loginResult: {
-            userId: "1",
+            userId: id,
             name: username,
             token: token,
           },
