@@ -5,15 +5,15 @@ import connection from "./database.js";
 
 const cors = require("cors");
 
+const app = express();
+app.use(express.json());
+
 const corsOption = {
   origin: ["http://localhost:3000"],
 };
 app.use(cors(corsOption));
 //if you want in every domain then
 app.use(cors());
-
-const app = express();
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
