@@ -3,6 +3,15 @@ import bcrypt, { hash } from "bcrypt";
 import jwt from "jsonwebtoken";
 import connection from "./database.js";
 
+const cors = require("cors");
+
+const corsOption = {
+  origin: ["http://localhost:3000"],
+};
+app.use(cors(corsOption));
+//if you want in every domain then
+app.use(cors());
+
 const app = express();
 app.use(express.json());
 
