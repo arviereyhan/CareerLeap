@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         userModel = preferences.getToken()
 
         setupView()
+        loginHandler()
 
         binding.btnLogin.setOnClickListener {
             processLogin()
@@ -100,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginHandler(){
         if (userModel.token != null) {
-            startActivity(Intent(this, MainActivity::class.java).also {
+            startActivity(Intent(this, UploadCvActivity::class.java).also {
                 finish()
             })
 
