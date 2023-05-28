@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CarrerLeap"
         tools:targetApi="31">
         <activity
+            android:name=".ui.uploadcv.UploadCvActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.auth.login.LoginActivity"
             android:exported="false" />
         <activity

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.data.repository.DataRepository
+import com.example.carrerleap.ui.auth.login.LoginViewModel
 import com.example.carrerleap.ui.auth.register.RegisterViewModel
 
     class ViewModelFactory(private val repository: DataRepository): ViewModelProvider.NewInstanceFactory() {
@@ -12,6 +13,8 @@ import com.example.carrerleap.ui.auth.register.RegisterViewModel
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
                 return RegisterViewModel(repository) as T
+            }  else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+                return LoginViewModel(repository) as T
             }
             throw IllegalArgumentException("Unknown ViewModel Class: ${modelClass.name}")
         }
