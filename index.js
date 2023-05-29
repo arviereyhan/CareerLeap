@@ -1,15 +1,32 @@
 import express, { json } from "express";
 import bcrypt, { hash } from "bcrypt";
 import jwt from "jsonwebtoken";
-import connection from "./database.js";
 import cors from "cors";
+import session from "express-session";
+import multer from "multer";
+import { Storage } from "@google-cloud/storage";
+
+import connection from "./database.js";
+import uploadToStorage from "./storage.js";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const upload = multer({ dest: "uploads/" });
+
+// Configure session middleware
+app.use(
+  session({
+    secret: "your_secret_key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 const corsOption = {
   origin: ["http://localhost:3000"],
+  credentials: true,
 };
 app.use(cors(corsOption));
 //if you want in every domain then
@@ -85,25 +102,24 @@ app.post("/login", (req, res) => {
     function (error, results, fields) {
       let checkPassword, id, username;
       try {
-        console.log(results, "results");
+        // if (Array.isArray(results) && results.length === 0) {}
         if (results.length !== 0) {
           checkPassword = bcrypt.compareSync(password, results[0].password);
           id = results[0].id;
           username = results[0].full_name;
+          req.session.userId = id;
         } else {
-          return res.status(404).json({ error: "There is no such as email" });
+          return res.status(401).json({ error: "There is no such as email" });
         }
-        console.log(username, "username");
 
-        // if (Array.isArray(results) && results.length === 0) {}
         if (!email || !password) {
           return res
-            .status(404)
+            .status(401)
             .json({ error: "Please enter the email and password" });
         }
         if (!checkPassword) {
           return res
-            .status(404)
+            .status(401)
             .json({ error: "Incorrect password. Please try again." });
         }
 
@@ -123,6 +139,31 @@ app.post("/login", (req, res) => {
       } catch (error) {
         console.log(error, "error");
         res.status(500).json({ error: "Internal server error" });
+      }
+    }
+  );
+});
+app.put("/profile", upload.single("nama_file"), async (req, res) => {
+  const userId = req.session.userId;
+  const { full_name, date_of_birth, phone_number, location, cv_url } = req.body;
+
+  const profile_file = req.file;
+  const profile_url = await uploadToStorage(profile_file);
+
+  connection.query(
+    "UPDATE users SET full_name = ?, date_of_birth = ?, phone_number = ?, location = ?, profile_url = ? WHERE id = ?",
+    [full_name, date_of_birth, phone_number, location, profile_url, userId],
+    function (error, results, fields) {
+      {
+        try {
+          return res.status(200).json({
+            error: false,
+            message: "User Updated",
+          });
+        } catch (error) {
+          console.log(error, "error");
+          res.status(500).json({ error: "Internal server error" });
+        }
       }
     }
   );
