@@ -4,6 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.uploadcv.UploadCvActivity">
+    tools:context=".ui.uploadcv.UploadCvActivity"
+    android:background="@color/dark_purple">
+
+
+    <TextView
+        android:id="@+id/textView_uploadcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="197dp"
+        android:fontFamily="@font/inter_extra_bold"
+        android:text="SILAHKAN UPLOAD CV KAMU !"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/upload_cv_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="156dp"
+        android:src="@drawable/upload_file"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_uploadcv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
