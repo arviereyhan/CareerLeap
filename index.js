@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import cors from "cors";
 import session from "express-session";
 import multer from "multer";
-import { Storage } from "@google-cloud/storage";
 
 import connection from "./database.js";
 import uploadToStorage from "./storage.js";
@@ -29,8 +28,6 @@ const corsOption = {
   credentials: true,
 };
 app.use(cors(corsOption));
-//if you want in every domain then
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -143,31 +140,90 @@ app.post("/login", (req, res) => {
     }
   );
 });
-app.put("/profile", upload.single("nama_file"), async (req, res) => {
-  const userId = req.session.userId;
-  const { full_name, date_of_birth, phone_number, location, cv_url } = req.body;
 
-  const profile_file = req.file;
-  const profile_url = await uploadToStorage(profile_file);
+// form data
+// "nama" -> "Andika",
+// "nama_file" -> 'fileblababla'
 
-  connection.query(
-    "UPDATE users SET full_name = ?, date_of_birth = ?, phone_number = ?, location = ?, profile_url = ? WHERE id = ?",
-    [full_name, date_of_birth, phone_number, location, profile_url, userId],
-    function (error, results, fields) {
-      {
-        try {
-          return res.status(200).json({
-            error: false,
-            message: "User Updated",
-          });
-        } catch (error) {
-          console.log(error, "error");
-          res.status(500).json({ error: "Internal server error" });
+const checkJwtToken = (req, res, next) => {
+  const token = req.headers["x-user-token"];
+  // authorizotion bearer token
+  // x-user-token
+  // verify token jwt.verify
+  // payload.userId
+  req.user = { userId: userId };
+  next();
+};
+app.put(
+  "/profile",
+  // checkJwtToken,
+  upload.single("nama_file"),
+  async (req, res) => {
+    // req.user = { userId }
+    const userId = req.session.userId;
+    const { full_name, date_of_birth, phone_number, location } = req.body;
+
+    const profile_file = req.file;
+    const profile_url = await uploadToStorage(profile_file);
+
+    connection.query(
+      "UPDATE users SET full_name = ?, date_of_birth = ?, phone_number = ?, location = ?, profile_url = ?, cv_url = ? WHERE id = ?",
+      [
+        full_name,
+        date_of_birth,
+        phone_number,
+        location,
+        profile_url,
+        cv_url,
+        userId,
+      ],
+      function (error, results, fields) {
+        {
+          try {
+            return res.status(200).json({
+              error: false,
+              message: "User Updated",
+            });
+          } catch (error) {
+            console.log(error, "error");
+            res.status(500).json({ error: "Internal server error" });
+          }
         }
       }
-    }
-  );
-});
+    );
+  }
+);
+
+app.put(
+  "/cv",
+  // checkJwtToken,
+  upload.single("file_cv"),
+  async (req, res) => {
+    // req.user = { userId }
+    const userId = req.session.userId;
+
+    const cv_file = req.file;
+    const cv_url = await uploadToStorage(cv_file);
+
+    connection.query(
+      "UPDATE users SET cv_url = ? WHERE id = ?",
+      [cv_url, userId],
+      function (error, results, fields) {
+        {
+          try {
+            return res.status(200).json({
+              error: false,
+              message: "CV Uploaded",
+            });
+          } catch (error) {
+            console.log(error, "error");
+            res.status(500).json({ error: "Internal server error" });
+          }
+        }
+      }
+    );
+  }
+);
 
 app.listen(8080, () => {
   console.log("Server is running on port 8080");

@@ -1,5 +1,6 @@
 import { Storage } from "@google-cloud/storage";
-import { SERVICE_ACCOUNT_KEY } from "./env.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 export const getPublicUrl = (bucketName, fileName) =>
   `https://storage.googleapis.com/${bucketName}/${encodeURIComponent(
@@ -8,12 +9,13 @@ export const getPublicUrl = (bucketName, fileName) =>
 
 const storage = new Storage({
   projectId: "careerleap",
-  credentials: JSON.parse(SERVICE_ACCOUNT_KEY),
+  credentials: JSON.parse(process.env.SERVICE_ACCOUNT_KEY),
 });
 
 const BUCKET_NAME = "career-leap";
 
 const uploadToStorage = async (file) => {
+  console.log(file, "file");
   const fileName = `${Date.now()}-${file.originalname}`;
   const options = {
     destination: fileName,
