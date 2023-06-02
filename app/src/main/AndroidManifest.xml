@@ -16,6 +16,10 @@
         android:theme="@style/Theme.CarrerLeap"
         tools:targetApi="31">
         <activity
+            android:name=".ui.homescreen.HomeScreenActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home_screen" />
+        <activity
             android:name=".ui.uploadcv.UploadCvActivity"
             android:exported="false" />
         <activity
