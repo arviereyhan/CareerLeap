@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.homescreen.ui.dashboard.DashboardFragment">
+    android:background="@color/light_purple"
+    tools:context=".ui.homescreen.ui.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/text_dashboard"
