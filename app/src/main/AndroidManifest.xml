@@ -16,6 +16,15 @@
         android:theme="@style/Theme.CarrerLeap"
         tools:targetApi="31">
         <activity
+            android:name=".ui.choose.ChooseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.question.QuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.uploadcv.UploadCvActivity"
             android:exported="false" />
         <activity

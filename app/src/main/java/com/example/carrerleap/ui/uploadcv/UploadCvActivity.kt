@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityUploadCvBinding
+import com.example.carrerleap.ui.choose.ChooseActivity
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.UserModel
 
@@ -33,6 +34,12 @@ class UploadCvActivity : AppCompatActivity() {
 
         binding.uploadCvButton.setOnClickListener {
             openFilePicker()
+        }
+
+        binding.btnSubmitCv.setOnClickListener {
+            val intent = Intent(this@UploadCvActivity, ChooseActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
