@@ -32,11 +32,11 @@ class EditButton : AppCompatButton {
         super.onDraw(canvas)
         background = buttonBackground
         setTextColor(txtColor)
-        textSize = 24f
+        textSize = 12f
         gravity = Gravity.CENTER
-        canvas.drawText("EDIT", (width/2f)-20f, 119.5f, paint)
+        canvas.drawText("EDIT PROFILE", (width/2f)-50f, 106.5f, paint)
 
-        buttonPencil.setBounds(60, 60, 140, 130)
+        buttonPencil.setBounds(40, 60, 120, 130)
         buttonPencil.draw(canvas)
 
 
