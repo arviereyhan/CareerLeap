@@ -7,6 +7,7 @@ import com.example.carrerleap.data.repository.DataRepository
 import com.example.carrerleap.ui.auth.login.LoginViewModel
 import com.example.carrerleap.ui.auth.register.RegisterViewModel
 import com.example.carrerleap.ui.uploadcv.UploadCvViewModel
+import com.example.carrerleap.ui.homescreen.ui.profile.ProfileViewModel
 
 class ViewModelFactory(private val repository: DataRepository): ViewModelProvider.NewInstanceFactory() {
 
@@ -19,6 +20,10 @@ class ViewModelFactory(private val repository: DataRepository): ViewModelProvide
             } else if (modelClass.isAssignableFrom(UploadCvViewModel::class.java)) {
                 return UploadCvViewModel(repository) as T
             }
+            else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+                return ProfileViewModel(repository) as T
+            }
+
             throw IllegalArgumentException("Unknown ViewModel Class: ${modelClass.name}")
         }
 

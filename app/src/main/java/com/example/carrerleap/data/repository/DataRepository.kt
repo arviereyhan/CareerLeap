@@ -1,9 +1,11 @@
 package com.example.carrerleap.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.carrerleap.data.remote.network.ApiService
 import com.example.carrerleap.data.remote.response.LoginResponse
+import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
 import com.example.carrerleap.utils.Result
 import okhttp3.MultipartBody
@@ -36,6 +38,13 @@ class DataRepository(private val apiService: ApiService) {
             val response = apiService.uploadCv(file,bearerToken)
             emit(Result.Success(response))
         } catch (e:Exception){
+    fun getProfile(token : String): LiveData<Result<ProfileResponse>> = liveData{
+        try {
+            Log.d("TOKEN", token)
+            val response = apiService.get_profile("Bearer $token")
+            emit(Result.Success(response))
+        }
+        catch(e: Exception){
             emit(Result.Error(e.toString()))
         }
     }
