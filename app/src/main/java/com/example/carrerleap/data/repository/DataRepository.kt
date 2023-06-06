@@ -38,6 +38,9 @@ class DataRepository(private val apiService: ApiService) {
             val response = apiService.uploadCv(file,bearerToken)
             emit(Result.Success(response))
         } catch (e:Exception){
+            emit(Result.Error(e.toString()))
+        }
+    }
     fun getProfile(token : String): LiveData<Result<ProfileResponse>> = liveData{
         try {
             Log.d("TOKEN", token)
