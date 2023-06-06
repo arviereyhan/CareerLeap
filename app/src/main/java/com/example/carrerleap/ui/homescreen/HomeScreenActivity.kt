@@ -1,23 +1,16 @@
 package com.example.carrerleap.ui.homescreen
 
-import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.view.WindowInsets
-import android.view.WindowManager
-import androidx.appcompat.app.ActionBar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityHomeScreenBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeScreenActivity : AppCompatActivity() {
 
