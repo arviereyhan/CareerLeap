@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -71,6 +72,9 @@ class LoginActivity : AppCompatActivity() {
                             val loginModel = UserModel(
                                 token = data.loginResult.token
                             )
+                            Log.d("TOKEN", data.loginResult.token) // mengetes apakah token sudah benar
+                            Log.d("TOKEN", loginModel.token!!) // mengetes apakah token sudah benar
+
 
                             preferences.saveToken(loginModel)
                             intent.putExtra(EXTRA_TOKEN, data.loginResult.token)

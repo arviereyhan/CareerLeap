@@ -48,6 +48,6 @@ class EditButton : AppCompatButton {
     private fun init() {
         txtColor = ContextCompat.getColor(context, android.R.color.white)
         buttonBackground = ContextCompat.getDrawable(context, R.drawable.bg_button) as Drawable
-        buttonPencil = ContextCompat.getDrawable(context,R.drawable.pensil) as Drawable
+        buttonPencil = ContextCompat.getDrawable(context,R.drawable.pensil_putih) as Drawable
     }
 }
