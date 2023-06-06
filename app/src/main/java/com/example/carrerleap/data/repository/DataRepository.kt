@@ -6,6 +6,7 @@ import com.example.carrerleap.data.remote.network.ApiService
 import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
 import com.example.carrerleap.utils.Result
+import okhttp3.MultipartBody
 
 class DataRepository(private val apiService: ApiService) {
 
@@ -27,6 +28,20 @@ class DataRepository(private val apiService: ApiService) {
         catch(e: Exception){
             emit(Result.Error(e.toString()))
         }
+    }
+
+    fun uploadCv(file: MultipartBody.Part, token: String): LiveData<Result<RegisterResponse>> = liveData {
+        try {
+            val bearerToken = generateBearerToken(token)
+            val response = apiService.uploadCv(file,bearerToken)
+            emit(Result.Success(response))
+        } catch (e:Exception){
+            emit(Result.Error(e.toString()))
+        }
+    }
+
+    private fun generateBearerToken(token: String): String {
+        return "Bearer $token"
     }
 
 

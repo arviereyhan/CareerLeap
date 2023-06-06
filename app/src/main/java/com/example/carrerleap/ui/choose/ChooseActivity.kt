@@ -10,17 +10,28 @@ import android.widget.Toast
 import com.example.carrerleap.R
 import com.example.carrerleap.data.dummy.JobsDataSource
 import com.example.carrerleap.databinding.ActivityChooseBinding
+import com.example.carrerleap.ui.main.MainActivity
 import com.example.carrerleap.ui.question.QuestionActivity
+import com.example.carrerleap.utils.JobsModel
+import com.example.carrerleap.utils.Preferences
 
 class ChooseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityChooseBinding
     private var selectedItem: String? = null
+    private lateinit var preferences: Preferences
+    private lateinit var jobsModel: JobsModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        preferences = Preferences(this)
+
+        jobsModel = preferences.getJobs()
+
+        questionHandler()
 
         val jobs = JobsDataSource.question
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, jobs)
@@ -46,6 +57,14 @@ class ChooseActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun questionHandler(){
+        if (jobsModel.jobs != null) {
+            startActivity(Intent(this, MainActivity::class.java).also {
+                finish()
+            })
+        }
     }
 
 

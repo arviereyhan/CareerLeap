@@ -42,9 +42,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             processLogin()
         }
-
-
-
     }
 
     private fun processLogin() {
@@ -85,7 +82,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun setupView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

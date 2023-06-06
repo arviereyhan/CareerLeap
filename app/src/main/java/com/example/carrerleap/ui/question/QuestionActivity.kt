@@ -10,22 +10,33 @@ import com.example.carrerleap.R
 import com.example.carrerleap.data.dummy.QuestionDataSource
 import com.example.carrerleap.databinding.ActivityQuestionBinding
 import com.example.carrerleap.ui.main.MainActivity
+import com.example.carrerleap.ui.uploadcv.UploadCvActivity
+import com.example.carrerleap.utils.JobsModel
+import com.example.carrerleap.utils.Preferences
 
 class QuestionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQuestionBinding
     private var currentQuestionIndex = 0
     private lateinit var question: List<String>
     private val userAnswers: ArrayList<Int> = ArrayList()
+    private lateinit var preferences: Preferences
+    private lateinit var jobsModel: JobsModel
+    private lateinit var selectedOption : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityQuestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val selectedOption = intent.getStringExtra(JOBS).toString()
+        selectedOption = intent.getStringExtra(JOBS).toString()
         Log.i("test", selectedOption)
         question = QuestionDataSource.getQuestions(selectedOption)!!
         binding.tvQuestion.text = question[currentQuestionIndex]
+        preferences = Preferences(this)
+
+        jobsModel = preferences.getJobs()
+
+        questionHandler()
 
 
         binding.btnNext.setOnClickListener {
@@ -60,6 +71,11 @@ class QuestionActivity : AppCompatActivity() {
     private fun navigateToHomePage() {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra(USER_ANSWERS, userAnswers.toIntArray())
+        val mainModel = JobsModel(
+            jobs = selectedOption,
+            score = userAnswers.toIntArray()
+        )
+        preferences.saveJobs(mainModel)
         startActivity(intent)
         finish()
 
@@ -80,6 +96,14 @@ class QuestionActivity : AppCompatActivity() {
     private fun printIntArray(array: IntArray) {
         val arrayString = array.joinToString(", ")
         Log.d("Array Log", "Array: $arrayString")
+    }
+
+    private fun questionHandler(){
+        if (jobsModel.score != null) {
+            startActivity(Intent(this, MainActivity::class.java).also {
+                finish()
+            })
+        }
     }
 
     companion object{
