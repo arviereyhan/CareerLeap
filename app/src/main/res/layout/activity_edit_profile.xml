@@ -84,6 +84,17 @@
       app:layout_constraintStart_toStartOf="@+id/profile_image"
       app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
+  <ImageView
+      android:id="@+id/editnamebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="203dp"
+      android:layout_marginEnd="16dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
   <TextView
       android:id="@+id/edit_birthdate"
       android:layout_width="wrap_content"
@@ -115,6 +126,19 @@
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="@+id/textView_name"
       app:layout_constraintTop_toBottomOf="@+id/textView_name" />
+
+  <ImageView
+      android:id="@+id/editbirthdatebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="256dp"
+      android:layout_marginEnd="16dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editnamebutton"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/editnamebutton"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/edit_phonenumber"
@@ -148,6 +172,20 @@
       app:layout_constraintTop_toBottomOf="@+id/birthdate" />
 
 
+  <ImageView
+      android:id="@+id/editphonenumberbutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+
+      android:layout_marginTop="312dp"
+      android:layout_marginEnd="16dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editbirthdatebutton"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/editbirthdatebutton"
+      app:layout_constraintTop_toTopOf="parent" />
+
   <TextView
       android:id="@+id/edit_email"
       android:layout_width="wrap_content"
@@ -163,6 +201,16 @@
       app:layout_constraintEnd_toStartOf="@+id/email"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/email" />
+
+  <ImageView
+      android:id="@+id/editemailbutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editphonenumberbutton"
+      app:layout_constraintStart_toStartOf="@+id/editphonenumberbutton"
+      tools:layout_editor_absoluteY="368dp" />
 
   <TextView
       android:id="@+id/email"
@@ -209,5 +257,16 @@
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="@+id/email"
       app:layout_constraintTop_toBottomOf="@+id/email" />
+
+  <ImageView
+      android:id="@+id/editlocationbutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+
+      app:layout_constraintEnd_toEndOf="@+id/editemailbutton"
+      app:layout_constraintStart_toStartOf="@+id/editemailbutton"
+      tools:layout_editor_absoluteY="421dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

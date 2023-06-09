@@ -33,6 +33,7 @@ class EditProfileActivity : AppCompatActivity() {
             binding.textViewName.text = userData.name
         }
 
+
         if (userData.birthdate==null){
             binding.birthdate.text = getString(R.string.not_available)
         }

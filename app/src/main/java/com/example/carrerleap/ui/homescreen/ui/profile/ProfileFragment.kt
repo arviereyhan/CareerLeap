@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.carrerleap.R
 import com.example.carrerleap.data.userdata.UserData
 import com.example.carrerleap.databinding.FragmentProfileBinding
 import com.example.carrerleap.ui.auth.login.LoginViewModel
@@ -59,9 +60,8 @@ class ProfileFragment : Fragment() {
 
         binding.editButton1.setOnClickListener {
             val intent = Intent(context, EditProfileActivity::class.java)
-            intent.putExtra("EXTRA_DATA",userData)
-
             if(isLoaded){               //mengecek apakah data sudah diload dari server, karena jika pindah activity masih belum keload nanti kena NPE
+                intent.putExtra("EXTRA_DATA",userData)
                 startActivity(intent)
             }
 
@@ -87,39 +87,41 @@ class ProfileFragment : Fragment() {
                 is Result.Success -> {
 
                     if(it.data.userProfile?.fullName == null){
-                        binding.textViewName.text = "data kosong"
+                        binding.textViewName.text = getString(R.string.not_available)
                     }
                     else {
                         binding.textViewName.text = it.data.userProfile?.fullName
                     }
 
                     if(it.data.userProfile?.dateOfBirth == null){
-                        binding.textViewBirth.text = "data kosong"
+                        binding.textViewBirth.text = "Date of birth is empty"
                     }
                     else {
                         binding.textViewBirth.text = it.data.userProfile?.dateOfBirth
                     }
 
                     if(it.data.userProfile?.email == null){
-                        binding.textViewEmail.text = "data kosong"
+                        binding.textViewEmail.text = "email is empty"
                     }
                     else{
                         binding.textViewEmail.text = it.data.userProfile?.email
                     }
 
                     if(it.data.userProfile?.location == null){
-                        binding.textViewLocation.text = "data kosong"
+                        binding.textViewLocation.text = "Location is empty"
                     }
                     else {
                         binding.textViewLocation.text = it.data.userProfile?.location
                     }
 
                     if(it.data.userProfile?.phoneNumber== null){
-                        binding.textViewPhonenumber.text = "data kosong"
+                        binding.textViewPhonenumber.text = "Phone number is empty"
                     }
                     else {
                         binding.textViewPhonenumber.text = it.data.userProfile?.phoneNumber
                     }
+
+                    binding.textViewCareer.text = "Career is empty"
 
                     userData = UserData(it.data.userProfile?.fullName,
                         "dummy profile url",
