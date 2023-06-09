@@ -1,5 +1,6 @@
 package com.example.carrerleap.ui.homescreen.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.databinding.FragmentProfileBinding
 import com.example.carrerleap.ui.auth.login.LoginViewModel
+import com.example.carrerleap.ui.homescreen.ui.editprofile.EditProfileActivity
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
 import com.example.carrerleap.utils.UserModel
@@ -52,8 +54,19 @@ class ProfileFragment : Fragment() {
 
         setupview()
 
+        binding.editButton1.setOnClickListener {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         return root
     }
+
+
+    //override fun onResume() {
+        //super.onResume()              // KEMUNGKINAN JIKA DATA PADA PROFILE TIDAK UP TO DATE SETELAH KEMBALI DARI UPDATE
+        //setupview()
+    // }
 
     override fun onDestroyView() {
         super.onDestroyView()
