@@ -30,6 +30,7 @@ class ProfileFragment : Fragment() {
     private  lateinit var token: String
     private lateinit var profileViewModel: ProfileViewModel
     private  lateinit var userData: UserData
+    private var isLoaded: Boolean = false
 
 
 
@@ -59,7 +60,11 @@ class ProfileFragment : Fragment() {
         binding.editButton1.setOnClickListener {
             val intent = Intent(context, EditProfileActivity::class.java)
             intent.putExtra("EXTRA_DATA",userData)
-            startActivity(intent)
+
+            if(isLoaded){               //mengecek apakah data sudah diload dari server, karena jika pindah activity masih belum keload nanti kena NPE
+                startActivity(intent)
+            }
+
         }
 
         return root
@@ -123,6 +128,7 @@ class ProfileFragment : Fragment() {
                         it.data.userProfile?.email,
                         it.data.userProfile?.location
                     )
+                    isLoaded = true
 
 
                 }
