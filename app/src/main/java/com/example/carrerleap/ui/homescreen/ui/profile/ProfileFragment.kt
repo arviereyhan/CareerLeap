@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.carrerleap.data.userdata.UserData
 import com.example.carrerleap.databinding.FragmentProfileBinding
 import com.example.carrerleap.ui.auth.login.LoginViewModel
 import com.example.carrerleap.ui.homescreen.ui.editprofile.EditProfileActivity
@@ -28,6 +29,7 @@ class ProfileFragment : Fragment() {
     private lateinit var userModel: UserModel
     private  lateinit var token: String
     private lateinit var profileViewModel: ProfileViewModel
+    private  lateinit var userData: UserData
 
 
 
@@ -56,6 +58,7 @@ class ProfileFragment : Fragment() {
 
         binding.editButton1.setOnClickListener {
             val intent = Intent(context, EditProfileActivity::class.java)
+            intent.putExtra("EXTRA_DATA",userData)
             startActivity(intent)
         }
 
@@ -112,6 +115,14 @@ class ProfileFragment : Fragment() {
                     else {
                         binding.textViewPhonenumber.text = it.data.userProfile?.phoneNumber
                     }
+
+                    userData = UserData(it.data.userProfile?.fullName,
+                        "dummy profile url",
+                        it.data.userProfile?.dateOfBirth,
+                        it.data.userProfile?.phoneNumber,
+                        it.data.userProfile?.email,
+                        it.data.userProfile?.location
+                    )
 
 
                 }
