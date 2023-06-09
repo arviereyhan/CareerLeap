@@ -13,7 +13,7 @@ class ProfileViewModel(private val repository: DataRepository) : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
         value = ""
     }
-    val text: LiveData<String> = _text
+    val text: LiveData<String> = _text //hapus ini nanti
 
     fun get_profile(token: String) = repository.getProfile(token)
 }

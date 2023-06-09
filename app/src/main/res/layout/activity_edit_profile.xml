@@ -8,17 +8,200 @@
     android:background="@color/light_purple"
     tools:context=".ui.homescreen.ui.editprofile.EditProfileActivity">
 
-  <de.hdodenhof.circleimageview.CircleImageView
-      android:id="@+id/profile_image"
-      android:layout_width="94dp"
-      android:layout_height="95dp"
-      android:layout_marginTop="32dp"
-      android:layout_marginBottom="16dp"
-      android:src="@drawable/profile_default"
-      app:civ_border_color="#FFFFFF"
-      app:civ_border_width="2dp"
+  <TextView
+      android:id="@+id/textView_activity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Edit Profile"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="32sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile_image"
+      android:layout_width="94dp"
+      android:layout_height="95dp"
+      android:layout_marginTop="60dp"
+      android:src="@drawable/profile_default"
+      app:civ_border_color="#FFFFFF"
+      app:civ_border_width="2dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.589"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/desc_editprofile"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="40dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Profile Picture"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+      app:layout_constraintEnd_toStartOf="@id/profile_image"
+      app:layout_constraintHorizontal_bias="0.457"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/profile_image"
+      app:layout_constraintVertical_bias="0.527" />
+
+  <TextView
+      android:id="@+id/desc_editname"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="124dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Name"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toStartOf="@id/textView_name"
+      app:layout_constraintTop_toTopOf="@id/textView_name"
+      app:layout_constraintBottom_toBottomOf="@id/textView_name"
+      tools:layout_editor_absoluteY="206dp" />
+
+  <TextView
+      android:id="@+id/textView_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="28dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Dzikri Ananda"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="@id/profile_image"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@id/profile_image"
+      app:layout_constraintTop_toBottomOf="@id/profile_image" />
+
+
+  <TextView
+      android:id="@+id/edit_birthdate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="92dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="BirthDate"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@+id/birthdate"
+      app:layout_constraintEnd_toStartOf="@+id/birthdate"
+      app:layout_constraintTop_toTopOf="@+id/birthdate"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/birthdate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="09/04/2002"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="@+id/textView_name"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/textView_name"
+      app:layout_constraintTop_toBottomOf="@+id/textView_name" />
+
+  <TextView
+      android:id="@+id/edit_phonenumber"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="52dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Phone Number"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@+id/phonenumber"
+      app:layout_constraintEnd_toStartOf="@+id/phonenumber"
+      app:layout_constraintTop_toTopOf="@+id/phonenumber"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/phonenumber"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="081289170653"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="@+id/birthdate"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/birthdate"
+      app:layout_constraintTop_toBottomOf="@+id/birthdate" />
+
+
+  <TextView
+      android:id="@+id/edit_email"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="124dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Email"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@+id/email"
+      app:layout_constraintEnd_toStartOf="@+id/email"
+      app:layout_constraintTop_toTopOf="@+id/email"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/email"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Dzikri.785@gmail.com"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="@id/phonenumber"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/phonenumber"
+      app:layout_constraintTop_toBottomOf="@+id/phonenumber" />
+
+  <TextView
+      android:id="@+id/edit_location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="100dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Location"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@+id/location"
+      app:layout_constraintEnd_toStartOf="@+id/location"
+      app:layout_constraintTop_toTopOf="@+id/location"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Jakarta"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="@id/email"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/email"
+      app:layout_constraintTop_toBottomOf="@+id/email" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
