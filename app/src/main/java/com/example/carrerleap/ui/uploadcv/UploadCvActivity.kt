@@ -17,12 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityUploadCvBinding
 import com.example.carrerleap.ui.choose.ChooseActivity
+import com.example.carrerleap.ui.question.QuestionActivity
 import com.example.carrerleap.utils.CvModel
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
 import com.example.carrerleap.utils.UserModel
 import com.example.carrerleap.utils.ViewModelFactory
 import com.example.carrerleap.utils.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -87,8 +89,9 @@ class UploadCvActivity : AppCompatActivity() {
     private fun uploadCv() {
         if(getFile != null){
             val file = getFile as File
-            val requestFile = file.asRequestBody("application/pdf".toMediaTypeOrNull())
-            val filePart:MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            val requestFile = file.asRequestBody("application/pdf".toMediaType())
+            val filePart:MultipartBody.Part = MultipartBody.Part.createFormData("file_cv", file.name, requestFile)
+            Log.d("file", filePart.toString())
             viewModel.postCv(filePart, token).observe(this){
                 when(it){
                     is Result.Success -> {
@@ -98,6 +101,7 @@ class UploadCvActivity : AppCompatActivity() {
                         )
                         preferences.saveFile(uploadModel)
                         Toast.makeText(this, "File uploaded successfully", Toast.LENGTH_SHORT).show()
+                        Log.i("UploadCvActivity", "Navigating to ChooseActivity")
                         val intent = Intent(this@UploadCvActivity, ChooseActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -127,7 +131,6 @@ class UploadCvActivity : AppCompatActivity() {
             selectedFile.let { uri ->
                 val myFile = uriToFile(uri, this@UploadCvActivity)
                 getFile = myFile
-
             }
         }
         if (getFile != null){
@@ -138,16 +141,19 @@ class UploadCvActivity : AppCompatActivity() {
 
 
     private fun uploadHandler(){
-        if (isCv == "CV uploaded successfully") {
-            startActivity(Intent(this, ChooseActivity::class.java).also {
-                finish()
-            })
-
+        viewModel.getProfile(token).observe(this){
+            when(it){
+                is Result.Success -> {
+                    if (it.data.userProfile?.cvUrl != null){
+                        startActivity(Intent(this, ChooseActivity::class.java).also {
+                            finish()
+                        })
+                    }
+                }
+                is Result.Error -> {
+                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
-    }
-
-
-    companion object {
-        private const val FILE_PICKER_REQUEST_CODE = 1
     }
 }

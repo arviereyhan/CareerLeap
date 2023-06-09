@@ -1,7 +1,9 @@
 package com.example.carrerleap.data.remote.network
 
+import com.example.carrerleap.data.remote.response.JobsResponse
 import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.ProfileResponse
+import com.example.carrerleap.data.remote.response.QuestionsResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
 import okhttp3.MultipartBody
 import retrofit2.http.Field
@@ -31,15 +33,41 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
-    @FormUrlEncoded
+    @Multipart
     @PUT("cv")
     suspend fun uploadCv(
-        @Field ("file_cv")file_cv : MultipartBody.Part,
+        @Part file_cv : MultipartBody.Part,
         @Header("Authorization") token: String
     ): RegisterResponse
+
+    @FormUrlEncoded
+    @POST("insertJob")
+    suspend fun postJobs(
+        @Field ("job_id")jobs_id : Int,
+        @Header("Authorization") token: String
+    ): RegisterResponse
+
+    @FormUrlEncoded
+    @POST("insertScore")
+    suspend fun postScore(
+        @Field ("question_id")question_id : Int,
+        @Field ("score")score : Int,
+        @Header("Authorization") token: String
+    ): RegisterResponse
+
     @GET("profile")
     suspend fun get_profile(
         @Header("Authorization") authorization: String
     ): ProfileResponse
+
+    @GET("jobs")
+    suspend fun getJobs(
+        @Header("Authorization") token: String
+    ): JobsResponse
+
+    @GET("questions")
+    suspend fun getQuestions(
+        @Header("Authorization") token: String
+    ): QuestionsResponse
 
 }

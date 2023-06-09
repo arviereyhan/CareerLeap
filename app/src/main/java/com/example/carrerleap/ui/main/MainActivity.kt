@@ -23,12 +23,12 @@ class MainActivity : AppCompatActivity() {
         preferences = Preferences(this)
 
         var score = preferences.getJobs().score
-        var jobs = preferences.getJobs().jobs
+        var jobs = preferences.getJobs().jobsId
         var size = score?.size!! * 5
 
         Log.d("size", size.toString())
 
-        Log.d("jobs", jobs!!)
+        Log.d("jobs", jobs!!.toString())
 
         val total = score?.sum()?.toFloat() // Jumlahkan semua nilai dan ubah ke tipe Float
         val combinedPercentage = (total!! / size) * 100// Bagi jumlah persentase dengan jumlah elemen

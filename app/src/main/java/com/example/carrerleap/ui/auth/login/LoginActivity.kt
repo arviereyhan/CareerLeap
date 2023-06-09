@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityLoginBinding
+import com.example.carrerleap.ui.choose.ChooseActivity
 import com.example.carrerleap.ui.homescreen.HomeScreenActivity
 import com.example.carrerleap.ui.main.MainActivity
 import com.example.carrerleap.ui.uploadcv.UploadCvActivity
@@ -65,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                         is Result.Success -> {
                             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
                             val data = it.data
-                            val intent = Intent(this, HomeScreenActivity::class.java)
+                            val intent = Intent(this, UploadCvActivity::class.java)
                             val loginModel = UserModel(
                                 token = data.loginResult.token
                             )

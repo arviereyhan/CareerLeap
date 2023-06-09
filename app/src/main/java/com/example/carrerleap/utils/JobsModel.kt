@@ -6,6 +6,6 @@ import java.util.ArrayList
 
 @Parcelize
 data class JobsModel(
-    var jobs: String? = null,
+    var jobsId: Int? = null,
     var score: IntArray? = null,
 ): Parcelable

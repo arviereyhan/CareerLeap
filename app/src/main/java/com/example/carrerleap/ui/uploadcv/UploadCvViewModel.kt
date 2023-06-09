@@ -7,15 +7,8 @@ import okhttp3.MultipartBody
 import java.io.File
 
 class UploadCvViewModel(private val repository: DataRepository): ViewModel() {
-    private val selectedFile: MutableLiveData<File> = MutableLiveData()
-
-    fun setSelectedFile(file: File) {
-        selectedFile.value = file
-    }
-
-    fun getSelectedFile(): File? {
-        return selectedFile.value
-    }
 
     fun postCv(file: MultipartBody.Part, token: String) = repository.uploadCv(file, token)
+
+    fun getProfile(token: String) = repository.getProfile(token)
 }

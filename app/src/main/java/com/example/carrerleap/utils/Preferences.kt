@@ -29,7 +29,7 @@ internal class Preferences(context: Context) {
 
     fun saveJobs(data: JobsModel) {
         val editor = preferences.edit()
-        editor.putString(JOBS, data.jobs)
+        editor.putInt(JOBS, data.jobsId!!)
         val scoreString = data.score?.joinToString(",") // Mengonversi IntArray menjadi String dengan delimiter koma
         editor.putString(SCORE, scoreString)
         editor.apply()
@@ -38,7 +38,7 @@ internal class Preferences(context: Context) {
 
 
     fun getJobs(): JobsModel {
-        val jobs = preferences.getString(JOBS, null)
+        val jobs = preferences.getInt(JOBS, 0)
         val scoreString = preferences.getString(SCORE, null)
         val scoreIntArray = scoreString?.split(",")?.map { it.toIntOrNull() ?: 0 }?.toIntArray()
         return JobsModel(jobs, scoreIntArray)

@@ -20,8 +20,8 @@ val timeStamp: String = SimpleDateFormat(
 ).format(System.currentTimeMillis())
 
 fun createCustomTempFile(context: Context): File {
-    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-    return File.createTempFile(timeStamp, ".jpg", storageDir)
+    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+    return File.createTempFile(timeStamp, ".pdf", storageDir)
 }
 
 fun uriToFile(selectedFile: Uri, context: Context): File {

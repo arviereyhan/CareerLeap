@@ -1,8 +1,8 @@
 package com.example.carrerleap.data.dummy
 
 object QuestionDataSource {
-    val dummyData = mapOf(
-        "Mobile Developer" to listOf(
+    private val dummyData = mapOf(
+        "Mobile Development" to listOf(
             "Dasar Kotlin atau Java",
             "Melakukan testing",
             "Membuat View"
