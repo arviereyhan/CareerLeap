@@ -26,12 +26,12 @@
       android:id="@+id/profile_image"
       android:layout_width="94dp"
       android:layout_height="95dp"
-      android:layout_marginTop="60dp"
+      android:layout_marginTop="80dp"
       android:src="@drawable/profile_default"
       app:civ_border_color="#FFFFFF"
       app:civ_border_width="2dp"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.589"
+      app:layout_constraintHorizontal_bias="0.621"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,33 +39,31 @@
       android:id="@+id/desc_editprofile"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="40dp"
+      android:layout_marginStart="16dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Profile Picture"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
       app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-      app:layout_constraintEnd_toStartOf="@id/profile_image"
-      app:layout_constraintHorizontal_bias="0.457"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="@+id/profile_image"
-      app:layout_constraintVertical_bias="0.527" />
+      app:layout_constraintVertical_bias="0.541" />
 
   <TextView
       android:id="@+id/desc_editname"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="124dp"
+      android:layout_marginEnd="128dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Name"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
+      app:layout_constraintBottom_toBottomOf="@id/textView_name"
       app:layout_constraintEnd_toStartOf="@id/textView_name"
       app:layout_constraintTop_toTopOf="@id/textView_name"
-      app:layout_constraintBottom_toBottomOf="@id/textView_name"
-      tools:layout_editor_absoluteY="206dp" />
+      app:layout_constraintVertical_bias="0.0" />
 
   <TextView
       android:id="@+id/textView_name"
@@ -77,9 +75,8 @@
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="@id/profile_image"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="@id/profile_image"
+      app:layout_constraintEnd_toEndOf="@+id/profile_image"
+      app:layout_constraintStart_toStartOf="@+id/profile_image"
       app:layout_constraintTop_toBottomOf="@id/profile_image" />
 
 
@@ -87,7 +84,7 @@
       android:id="@+id/edit_birthdate"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="92dp"
+      android:layout_marginEnd="96dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="BirthDate"
       android:textAlignment="center"
@@ -117,7 +114,7 @@
       android:id="@+id/edit_phonenumber"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="52dp"
+      android:layout_marginEnd="56dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Phone Number"
       android:textAlignment="center"
@@ -148,7 +145,7 @@
       android:id="@+id/edit_email"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="124dp"
+      android:layout_marginEnd="128dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Email"
       android:textAlignment="center"
@@ -178,7 +175,7 @@
       android:id="@+id/edit_location"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="100dp"
+      android:layout_marginEnd="104dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Location"
       android:textAlignment="center"
