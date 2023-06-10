@@ -2,6 +2,7 @@ package com.example.carrerleap.ui.homescreen.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +19,13 @@ import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
 import com.example.carrerleap.utils.UserModel
 import com.example.carrerleap.utils.ViewModelFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var preferences: Preferences
     private lateinit var userModel: UserModel
@@ -32,6 +33,7 @@ class ProfileFragment : Fragment() {
     private lateinit var profileViewModel: ProfileViewModel
     private  lateinit var userData: UserData
     private var isLoaded: Boolean = false
+    private  lateinit var outputDateString: String
 
 
 
@@ -71,10 +73,10 @@ class ProfileFragment : Fragment() {
     }
 
 
-    //override fun onResume() {
-        //super.onResume()              // KEMUNGKINAN JIKA DATA PADA PROFILE TIDAK UP TO DATE SETELAH KEMBALI DARI UPDATE
-        //setupview()
-    // }
+    override fun onResume() {
+        super.onResume()              // Agar data tetap up-to-date ketika kembali dari edit profile activity
+        setupview()
+     }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -97,7 +99,11 @@ class ProfileFragment : Fragment() {
                         binding.textViewBirth.text = "Date of birth is empty"
                     }
                     else {
-                        binding.textViewBirth.text = it.data.userProfile?.dateOfBirth
+                        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        val inputDate: Date = inputFormat.parse(it.data.userProfile?.dateOfBirth)
+                        outputDateString = outputFormat.format(inputDate)
+                        binding.textViewBirth.text = outputDateString
                     }
 
                     if(it.data.userProfile?.email == null){
@@ -123,9 +129,11 @@ class ProfileFragment : Fragment() {
 
                     binding.textViewCareer.text = "Career is empty"
 
+
+
                     userData = UserData(it.data.userProfile?.fullName,
                         "dummy profile url",
-                        it.data.userProfile?.dateOfBirth,
+                        outputDateString,
                         it.data.userProfile?.phoneNumber,
                         it.data.userProfile?.email,
                         it.data.userProfile?.location

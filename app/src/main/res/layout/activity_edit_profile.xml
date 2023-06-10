@@ -8,6 +8,20 @@
     android:background="@color/light_purple"
     tools:context=".ui.homescreen.ui.editprofile.EditProfileActivity">
 
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.35" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.05" />
+
   <TextView
       android:id="@+id/textView_activity"
       android:layout_width="wrap_content"
@@ -39,69 +53,61 @@
 
   <ImageView
       android:id="@+id/editprofileimagebutton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
       android:scaleType="center"
-      android:src="@drawable/pensil"
+      android:src="@drawable/ic_camera"
       app:layout_constraintBottom_toBottomOf="@+id/profile_image"
       app:layout_constraintEnd_toEndOf="@+id/profile_image"
       app:layout_constraintStart_toStartOf="@+id/profile_image"
       app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
+
   <TextView
       android:id="@+id/desc_editprofile"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="28dp"
+      android:layout_marginTop="116dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Profile Picture"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-      app:layout_constraintEnd_toStartOf="@+id/profile_image"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/profile_image"
-      app:layout_constraintVertical_bias="0.513" />
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/desc_editname"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="87dp"
+      android:layout_marginTop="204dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Name"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="@+id/textView_name"
-      app:layout_constraintEnd_toStartOf="@+id/textView_name"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/textView_name"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/textView_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="28dp"
+      android:layout_marginTop="204dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Dzikri Ananda"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="@+id/profile_image"
-      app:layout_constraintStart_toStartOf="@+id/profile_image"
-      app:layout_constraintTop_toBottomOf="@id/profile_image" />
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
       android:id="@+id/editnamebutton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="203dp"
-      android:layout_marginEnd="16dp"
+      android:layout_marginEnd="8dp"
       android:scaleType="center"
       android:src="@drawable/pensil_putih"
       app:layout_constraintEnd_toEndOf="parent"
@@ -111,33 +117,27 @@
       android:id="@+id/edit_birthdate"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="56dp"
+      android:layout_marginTop="256dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="BirthDate"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="@+id/birthdate"
-      app:layout_constraintEnd_toStartOf="@+id/birthdate"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/birthdate"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/birthdate"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="256dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="09/04/2002"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="@+id/textView_name"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="@+id/textView_name"
-      app:layout_constraintTop_toBottomOf="@+id/textView_name" />
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
       android:id="@+id/editbirthdatebutton"
@@ -152,37 +152,32 @@
       app:layout_constraintStart_toStartOf="@+id/editnamebutton"
       app:layout_constraintTop_toTopOf="parent" />
 
+
   <TextView
       android:id="@+id/edit_phonenumber"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="16dp"
+      android:layout_height="23dp"
+      android:layout_marginTop="312dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Phone Number"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="@+id/phonenumber"
-      app:layout_constraintEnd_toStartOf="@+id/phonenumber"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/phonenumber" />
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/phonenumber"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="312dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="081289170653"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="@+id/birthdate"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="@+id/birthdate"
-      app:layout_constraintTop_toBottomOf="@+id/birthdate" />
-
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
       android:id="@+id/editphonenumberbutton"
@@ -202,17 +197,14 @@
       android:id="@+id/edit_email"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="90dp"
+      android:layout_marginTop="368dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Email"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="@+id/email"
-      app:layout_constraintEnd_toStartOf="@+id/email"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/email" />
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
       android:id="@+id/editemailbutton"
@@ -229,47 +221,40 @@
       android:id="@+id/email"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="368dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Dzikri.785@gmail.com"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="@id/phonenumber"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="@+id/phonenumber"
-      app:layout_constraintTop_toBottomOf="@+id/phonenumber" />
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/edit_location"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="64dp"
+      android:layout_marginTop="424dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Location"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintBottom_toBottomOf="@+id/location"
-      app:layout_constraintEnd_toStartOf="@+id/location"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/location" />
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/location"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
+      android:layout_marginTop="424dp"
       android:fontFamily="@font/inter_extra_bold"
       android:text="Jakarta"
       android:textAlignment="center"
       android:textColor="@color/white"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="@id/email"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="@+id/email"
-      app:layout_constraintTop_toBottomOf="@+id/email" />
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
       android:id="@+id/editlocationbutton"
