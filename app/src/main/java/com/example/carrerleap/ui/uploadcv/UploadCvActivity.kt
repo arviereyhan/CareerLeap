@@ -1,13 +1,10 @@
 package com.example.carrerleap.ui.uploadcv
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.provider.OpenableColumns
 import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -17,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityUploadCvBinding
 import com.example.carrerleap.ui.choose.ChooseActivity
-import com.example.carrerleap.ui.question.QuestionActivity
 import com.example.carrerleap.utils.CvModel
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
@@ -25,7 +21,6 @@ import com.example.carrerleap.utils.UserModel
 import com.example.carrerleap.utils.ViewModelFactory
 import com.example.carrerleap.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File

@@ -7,6 +7,7 @@ import com.example.carrerleap.data.repository.DataRepository
 import com.example.carrerleap.ui.auth.login.LoginViewModel
 import com.example.carrerleap.ui.auth.register.RegisterViewModel
 import com.example.carrerleap.ui.choose.ChooseViewModel
+import com.example.carrerleap.ui.homescreen.ui.home.HomeViewModel
 import com.example.carrerleap.ui.uploadcv.UploadCvViewModel
 import com.example.carrerleap.ui.homescreen.ui.profile.ProfileViewModel
 import com.example.carrerleap.ui.question.QuestionViewModel
@@ -27,6 +28,8 @@ class ViewModelFactory(private val repository: DataRepository): ViewModelProvide
                 return ChooseViewModel(repository) as T
             } else if (modelClass.isAssignableFrom(QuestionViewModel::class.java)) {
                 return QuestionViewModel(repository) as T
+            }else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+                return HomeViewModel(repository) as T
             }
 
             throw IllegalArgumentException("Unknown ViewModel Class: ${modelClass.name}")

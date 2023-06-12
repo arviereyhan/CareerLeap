@@ -89,9 +89,6 @@ class QuestionActivity : AppCompatActivity() {
             }
         }
 
-
-
-
         jobsModel = preferences.getJobs()
 
         questionHandler()

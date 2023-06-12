@@ -13,4 +13,5 @@
     <string name="title_activity_home_screen">HomeScreenActivity</string>
     <string name="title_home">Current Goal</string>
     <string name="title_profile">Profile</string>
+    <string name="progress_kamu">PROGRESS KAMU</string>
 </resources>
