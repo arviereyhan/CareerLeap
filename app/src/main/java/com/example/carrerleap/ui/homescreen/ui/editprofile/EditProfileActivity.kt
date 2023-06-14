@@ -10,28 +10,27 @@ import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.carrerleap.R
-import com.example.carrerleap.data.userdata.UpdateProfileRequest
 import com.example.carrerleap.data.userdata.UserData
 import com.example.carrerleap.databinding.ActivityEditProfileBinding
-import com.example.carrerleap.ui.auth.login.LoginActivity
-import com.example.carrerleap.ui.homescreen.HomeScreenActivity
-import com.example.carrerleap.ui.homescreen.ui.profile.ProfileViewModel
 import com.example.carrerleap.utils.*
 import com.example.carrerleap.utils.Preferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import java.text.SimpleDateFormat
 import java.util.*
 import okhttp3.RequestBody
-import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -41,7 +40,6 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var userData: UserData
     private lateinit var binding: ActivityEditProfileBinding
     private  lateinit var date: String
-    private  lateinit var updatedata: UpdateProfileRequest
     private lateinit var editProfileViewModel: EditProfileViewModel
     private  lateinit var preferences: Preferences
     private lateinit var userModel: UserModel
@@ -64,7 +62,11 @@ class EditProfileActivity : AppCompatActivity() {
         )[EditProfileViewModel::class.java]
 
         userData = intent.getParcelableExtra("EXTRA_DATA")!!
-        formatteddate = formatDate(userData.birthdate!!)
+
+        if(userData.birthdate!=null){
+            formatteddate = formatDate(userData.birthdate!!)
+        }
+
         lifecycleScope.launch{
             fileImage = downloadImage(userData.profileurl!!)!!
             setupView()
@@ -83,7 +85,12 @@ class EditProfileActivity : AppCompatActivity() {
         binding.editlocationbutton.setOnClickListener { inputEditText(it,"Location") }
 
         binding.savebutton.setOnClickListener {
-            UpdateProfile(token,userData.name!!,formatDate(userData.birthdate!!),userData.phonenumber!!,userData.location!!)
+            if (userData.name==null || userData.birthdate==null || userData.phonenumber==null || userData.location==null){
+                Toast.makeText(this,"Uncompleted Field! Please Fill All Field!",Toast.LENGTH_LONG).show()
+            }
+            else{
+                UpdateProfile(token,userData.name!!,formatDate(userData.birthdate!!),userData.phonenumber!!,userData.location!!,fileImage)
+            }
         }
 
 
@@ -235,13 +242,19 @@ class EditProfileActivity : AppCompatActivity() {
         return outputFormat.format(date)
     }
 
-    fun UpdateProfile(token: String, name: String,dateofbirth: String,phonenumber: String,location:String){
+    fun UpdateProfile(token: String, name: String,dateofbirth: String,phonenumber: String,location:String,image: File){
         val mediaType = "text/plain".toMediaTypeOrNull()
         val fullNamePart = RequestBody.create(mediaType, name)
         val dateOfBirthPart = RequestBody.create(mediaType, dateofbirth)
         val phoneNumberPart = RequestBody.create(mediaType, phonenumber)
         val locationPart = RequestBody.create(mediaType, location)
-        editProfileViewModel.updateProfile(token,fullNamePart,dateOfBirthPart,phoneNumberPart,locationPart).observe(this){
+        val requestImageFile = image.asRequestBody("image/*".toMediaType())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "file_profile",
+            image.name,
+            requestImageFile
+        )
+        editProfileViewModel.updateProfile(token,fullNamePart,dateOfBirthPart,phoneNumberPart,locationPart,imageMultipart).observe(this){
             when(it){
                 is Result.Success -> {
                     Toast.makeText(this, "Update Success!", Toast.LENGTH_SHORT).show()
@@ -286,6 +299,8 @@ class EditProfileActivity : AppCompatActivity() {
             null
         }
     }
+
+
 
     companion object {
         private const val FILE_PICKER_REQUEST_CODE = 1

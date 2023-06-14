@@ -4,7 +4,7 @@ import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
 import com.example.carrerleap.data.remote.response.UpdateResponse
-import com.example.carrerleap.data.userdata.UpdateProfileRequest
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 
@@ -38,6 +38,7 @@ interface ApiService {
         @Part("date_of_birth") dateOfBirth: RequestBody,
         @Part("phone_number") phoneNumber: RequestBody,
         @Part("location") location: RequestBody,
+        @Part file_profile: MultipartBody.Part,
     ): UpdateResponse
 
 }
