@@ -7,4 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class ListHomeItem(
     val id: Int,
     val skill: String,
+    val questionId: Int,
+    val score: Int
 ): Parcelable

@@ -1,8 +1,12 @@
 package com.example.carrerleap.ui.question
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +44,7 @@ class QuestionActivity : AppCompatActivity() {
             this@QuestionActivity,
             viewModelFactory
         )[QuestionViewModel::class.java]
+        setupView()
         preferences = Preferences(this)
 
         jobsModel = preferences.getJobs()
@@ -106,10 +111,12 @@ class QuestionActivity : AppCompatActivity() {
                 viewModel.postScore(currentQuestionId, answerValue, token ).observe(this){
                     when (it) {
                         is Result.Success -> {
+                            showLoading(true)
                             currentQuestionIndex++
 
                             if (currentQuestionIndex < relatedQuestions?.size ?: 0) {
                                 showQuestion(currentQuestionIndex)
+                                showLoading(false)
                             } else {
                                 navigateToHomePage()
                             }
@@ -126,6 +133,26 @@ class QuestionActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingState.visibility = View.VISIBLE
+        } else {
+            binding.loadingState.visibility = View.GONE
+        }
+    }
+
+    private fun setupView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
+    }
+
 
     private fun showQuestion(index: Int) {
         val question = relatedQuestions?.get(index)?.question
@@ -137,7 +164,6 @@ class QuestionActivity : AppCompatActivity() {
         val intent = Intent(this, HomeScreenActivity::class.java)
         intent.putExtra(USER_ANSWERS, userAnswers.toIntArray())
         val mainModel = JobsModel(
-
             score = userAnswers.toIntArray(),
             jobsId = selectedOptionId
         )
@@ -165,10 +191,20 @@ class QuestionActivity : AppCompatActivity() {
     }
 
     private fun questionHandler() {
-        if (jobsModel.score != null) {
-            startActivity(Intent(this, HomeScreenActivity::class.java).also {
-                finish()
-            })
+        viewModel.getScore(token).observe(this){
+            when (it) {
+                is Result.Success -> {
+                    val data = it.data.data
+                    if (data != null) {
+                        startActivity(Intent(this, HomeScreenActivity::class.java).also {
+                            finish()
+                        })
+                    }
+                }
+                is Result.Error -> {
+                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

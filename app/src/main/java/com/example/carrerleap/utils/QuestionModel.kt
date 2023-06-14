@@ -8,5 +8,5 @@ data class Job(
 data class Question(
     val id: Int,
     val question: String,
-    val jobId: Int
+    val jobId: Int,
 )

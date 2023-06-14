@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -69,6 +70,14 @@ class UploadCvActivity : AppCompatActivity() {
 
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingState.visibility = View.VISIBLE
+        } else {
+            binding.loadingState.visibility = View.GONE
+        }
+    }
+
     private fun setupView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -83,6 +92,7 @@ class UploadCvActivity : AppCompatActivity() {
 
     private fun uploadCv() {
         if(getFile != null){
+            showLoading(true)
             val file = getFile as File
             val requestFile = file.asRequestBody("application/pdf".toMediaType())
             val filePart:MultipartBody.Part = MultipartBody.Part.createFormData("file_cv", file.name, requestFile)

@@ -1,7 +1,11 @@
 package com.example.carrerleap.ui.choose
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -30,8 +34,8 @@ class ChooseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupView()
 
-        preferences = Preferences(this)
         val viewModelFactory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
             this@ChooseActivity,
@@ -47,6 +51,26 @@ class ChooseActivity : AppCompatActivity() {
         jobs()
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingState.visibility = View.VISIBLE
+        } else {
+            binding.loadingState.visibility = View.GONE
+        }
+    }
+
+    private fun setupView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
+    }
+
     private fun jobs(){
         viewModel.getJobs(token).observe(this){response ->
             when(response){
@@ -56,6 +80,7 @@ class ChooseActivity : AppCompatActivity() {
                     showJobs(jobs)
                     binding.btnToQuestion.setOnClickListener {
                         if (selectedItem != null){
+                            showLoading(true)
                             val selectedJob = selectedItem // Pekerjaan yang dipilih dari dropdown
                             val selectedJobId = data.data.find { it.job_name == selectedJob }?.id
                             val intent = Intent(this@ChooseActivity, QuestionActivity::class.java)

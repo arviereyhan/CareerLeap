@@ -1,5 +1,6 @@
 package com.example.carrerleap.data.remote.network
 
+import com.example.carrerleap.data.remote.response.CourseResponse
 import com.example.carrerleap.data.remote.response.HomeResponse
 import com.example.carrerleap.data.remote.response.JobsResponse
 import com.example.carrerleap.data.remote.response.LoginResponse
@@ -75,5 +76,13 @@ interface ApiService {
     suspend fun getHome(
         @Header("Authorization") token: String
     ): HomeResponse
+
+    @GET("getCourses")
+    suspend fun getCourse(
+        @Query ("questionId") questionId: Int,
+        @Query ("userScore") userScore: Int,
+        @Query ("jobId") jobId: Int,
+        @Header("Authorization") token: String
+    ): CourseResponse
 
 }

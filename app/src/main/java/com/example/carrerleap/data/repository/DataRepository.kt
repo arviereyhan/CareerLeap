@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.carrerleap.data.remote.network.ApiService
+import com.example.carrerleap.data.remote.response.CourseResponse
 import com.example.carrerleap.data.remote.response.HomeResponse
 import com.example.carrerleap.data.remote.response.JobsResponse
 import com.example.carrerleap.data.remote.response.LoginResponse
@@ -112,6 +113,18 @@ class DataRepository(private val apiService: ApiService) {
             emit(Result.Error(e.toString()))
         }
     }
+
+    fun getCourse(questionId: Int,userScore: Int,jobId: Int,token : String): LiveData<Result<CourseResponse>> = liveData{
+        try {
+            Log.d("TOKEN", token)
+            val response = apiService.getCourse(questionId,userScore,jobId ,"Bearer $token")
+            emit(Result.Success(response))
+        }
+        catch(e: Exception){
+            emit(Result.Error(e.toString()))
+        }
+    }
+
 
     private fun generateBearerToken(token: String): String {
         return "Bearer $token"
