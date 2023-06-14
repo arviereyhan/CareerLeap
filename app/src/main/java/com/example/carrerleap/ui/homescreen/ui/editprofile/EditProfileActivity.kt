@@ -3,11 +3,15 @@ package com.example.carrerleap.ui.homescreen.ui.editprofile
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageView
@@ -50,10 +54,13 @@ class EditProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Edit Profile"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         preferences = Preferences(this)
         userModel = preferences.getToken() //ambil token untuk update
         token = userModel.token!!
+
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
         editProfileViewModel = ViewModelProvider(
@@ -81,7 +88,6 @@ class EditProfileActivity : AppCompatActivity() {
         binding.editnamebutton.setOnClickListener { inputEditText(it,"Name") }
         binding.editbirthdatebutton.setOnClickListener { inputDate(it,"Birthdate") }
         binding.editphonenumberbutton.setOnClickListener { inputEditText(it,"Phone Number") }
-        binding.editemailbutton.setOnClickListener { inputEditText(it,"Email") }
         binding.editlocationbutton.setOnClickListener { inputEditText(it,"Location") }
 
         binding.savebutton.setOnClickListener {
@@ -92,9 +98,16 @@ class EditProfileActivity : AppCompatActivity() {
                 UpdateProfile(token,userData.name!!,formatDate(userData.birthdate!!),userData.phonenumber!!,userData.location!!,fileImage)
             }
         }
+    }
 
-
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed() // Kembali ke HomeFragment
+                return true
+            }
+        }
+        return super.onContextItemSelected(item)
     }
 
     private fun setupView() {
@@ -111,13 +124,6 @@ class EditProfileActivity : AppCompatActivity() {
         }
         else{
             binding.birthdate.text = userData.birthdate
-        }
-
-        if (userData.email==null){
-            binding.email.text = getString(R.string.not_available)
-        }
-        else{
-            binding.email.text = userData.email
         }
 
         if (userData.location==null){
@@ -162,7 +168,7 @@ class EditProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "Selected file: $fileName", Toast.LENGTH_SHORT).show()
                 binding.profileImage.setImageURI(uri)
 
-                val myFile = uriToFile(uri, this@EditProfileActivity)
+                val myFile = uriToImage(uri, this@EditProfileActivity)
                 fileImage = myFile
             }
         }

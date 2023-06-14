@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_extra_bold"
+        android:text="SUDAH SIAP MENINGKATKAN SKILL KAMU?"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal3" />
+
 
 
     <androidx.appcompat.widget.AppCompatButton

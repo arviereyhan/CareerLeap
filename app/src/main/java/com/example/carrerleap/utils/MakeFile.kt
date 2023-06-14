@@ -15,19 +15,19 @@ import java.util.*
     private const val FILENAME_FORMAT = "dd-MMM-yyyy"
     private const val MAXIMAL_SIZE = 1000000
 
-    val timeStamp: String = SimpleDateFormat(
+    val timeStampImage: String = SimpleDateFormat(
         FILENAME_FORMAT,
         Locale.US
     ).format(System.currentTimeMillis())
 
-    fun createCustomTempFile(context: Context): File {
+    fun createCustomTempFileImage(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(timeStamp, ".jpg", storageDir)
+        return File.createTempFile(timeStampImage, ".jpg", storageDir)
     }
 
-fun uriToFile(selectedImg: Uri, context: Context): File {
+fun uriToImage(selectedImg: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver
-    val myFile = createCustomTempFile(context)
+    val myFile = createCustomTempFileImage(context)
 
     val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
     val outputStream: OutputStream = FileOutputStream(myFile)

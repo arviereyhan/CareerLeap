@@ -14,6 +14,7 @@ import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.databinding.ActivitySplashBinding
 import com.example.carrerleap.ui.auth.LoginRegisterActivity
+import com.example.carrerleap.ui.choose.ChooseActivity
 import com.example.carrerleap.ui.homescreen.HomeScreenActivity
 import com.example.carrerleap.ui.homescreen.ui.home.HomeFragment
 import com.example.carrerleap.ui.question.QuestionActivity
@@ -100,7 +101,7 @@ class SplashActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         } else if (data.jobId == null){
-                            val intent = Intent(this@SplashActivity, HomeFragment::class.java)
+                            val intent = Intent(this@SplashActivity, ChooseActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
