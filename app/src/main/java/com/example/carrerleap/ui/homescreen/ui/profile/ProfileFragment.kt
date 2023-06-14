@@ -73,7 +73,7 @@ class ProfileFragment : Fragment() {
 
         }
 
-        binding.Logoutbutton.setOnClickListener { withEditText(it) }
+        binding.Logoutbutton.setOnClickListener {  }
 
         return root
     }
@@ -178,14 +178,5 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    fun withEditText(view: View) {
-        val builder = AlertDialog.Builder(requireContext())
-        val inflater = layoutInflater
-        builder.setTitle("Masukkan Nama: ")
-        val dialogLayout = inflater.inflate(R.layout.alert_dialog_with_edittext, null)
-        val editText  = dialogLayout.findViewById<EditText>(R.id.edit_text)
-        builder.setView(dialogLayout)
-        builder.setPositiveButton("OK") { dialogInterface, i -> Toast.makeText(context, "EditText is " + editText.text.toString(), Toast.LENGTH_SHORT).show() }
-        builder.show()
-    }
+
 }
