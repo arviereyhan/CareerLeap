@@ -5,6 +5,7 @@ import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
 import com.example.carrerleap.data.remote.response.UpdateResponse
 import com.example.carrerleap.data.userdata.UpdateProfileRequest
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -30,9 +31,13 @@ interface ApiService {
     ): ProfileResponse
 
     @PUT("/profile")
+    @Multipart
     suspend fun updateProfile(
         @Header("Authorization") token: String,
-        @Body request: UpdateProfileRequest
+        @Part("full_name") fullName: RequestBody,
+        @Part("date_of_birth") dateOfBirth: RequestBody,
+        @Part("phone_number") phoneNumber: RequestBody,
+        @Part("location") location: RequestBody,
     ): UpdateResponse
 
 }

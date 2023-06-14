@@ -10,6 +10,7 @@ import com.example.carrerleap.data.remote.response.RegisterResponse
 import com.example.carrerleap.data.remote.response.UpdateResponse
 import com.example.carrerleap.data.userdata.UpdateProfileRequest
 import com.example.carrerleap.utils.Result
+import okhttp3.RequestBody
 
 class DataRepository(private val apiService: ApiService) {
 
@@ -44,9 +45,9 @@ class DataRepository(private val apiService: ApiService) {
         }
     }
 
-    fun updateProfile(token: String,data: UpdateProfileRequest): LiveData<Result<UpdateResponse>> = liveData {
+    fun updateProfile(token: String,full_name: RequestBody,date_of_birth: RequestBody, phonenumber: RequestBody, location: RequestBody): LiveData<Result<UpdateResponse>> = liveData {
         try {
-            val response = apiService.updateProfile("Bearer $token",data)
+            val response = apiService.updateProfile("Bearer $token",full_name,date_of_birth,phonenumber,location)
             emit(Result.Success(response))
         }
         catch(e: Exception){

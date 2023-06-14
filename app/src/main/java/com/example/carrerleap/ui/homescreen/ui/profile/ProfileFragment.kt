@@ -23,6 +23,8 @@ import com.example.carrerleap.utils.UserModel
 import com.example.carrerleap.utils.ViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
+import com.bumptech.glide.Glide
+
 
 class ProfileFragment : Fragment() {
 
@@ -133,18 +135,39 @@ class ProfileFragment : Fragment() {
                         binding.textViewPhonenumber.text = it.data.userProfile?.phoneNumber
                     }
 
-                    binding.textViewCareer.text = "Career is empty"
+                    if(it.data.userProfile?.job== null){
+                        binding.textViewCareer.text = "Career is empty"
+                    }
+                    else {
+                        binding.textViewCareer.text = it.data.userProfile?.job
+                    }
+                    Log.i("kinerja","1")
+
+
+
+                    if(it.data.userProfile?.profileUrl==null){
+                        it.data.userProfile?.profileUrl=getString(R.string.default_pp)
+                        Log.i("kinerja","2")
+                    }
+
+                    Glide.with(this)
+                        .load(it.data.userProfile?.profileUrl)
+                        .into(binding.profileImage)
+
 
 
                     userData = UserData(it.data.userProfile?.fullName,
-                        "dummy profile url",
+                        it.data.userProfile?.profileUrl,
                         outputDateString,
                         it.data.userProfile?.phoneNumber,
                         it.data.userProfile?.email,
-                        it.data.userProfile?.location
+                        it.data.userProfile?.location,
+                        it.data.userProfile?.job
                     )
                     isLoaded = true
                     Log.i("isloaded",isLoaded.toString())
+                    Log.i("kinerja","3")
+
 
 
                 }

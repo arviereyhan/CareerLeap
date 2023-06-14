@@ -12,5 +12,6 @@ data class UserData(
     var birthdate: String?,
     var phonenumber: String?,
     var email: String?,
-    var location: String?
+    var location: String?,
+    var job: String?
 ): Parcelable
