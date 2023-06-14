@@ -20,7 +20,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      app:layout_constraintGuide_percent="0.05" />
+      app:layout_constraintGuide_percent="0.035" />
 
   <TextView
       android:id="@+id/textView_activity"
@@ -262,10 +262,22 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="29dp"
       android:scaleType="center"
-
       android:src="@drawable/pensil_putih"
       app:layout_constraintEnd_toEndOf="@+id/editemailbutton"
       app:layout_constraintStart_toStartOf="@+id/editemailbutton"
       app:layout_constraintTop_toBottomOf="@+id/editemailbutton" />
+
+  <ImageView
+      android:id="@+id/savebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="44dp"
+      android:scaleType="center"
+      android:src="@drawable/baseline_save_100"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

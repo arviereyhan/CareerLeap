@@ -7,6 +7,8 @@ import com.example.carrerleap.data.remote.network.ApiService
 import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
+import com.example.carrerleap.data.remote.response.UpdateResponse
+import com.example.carrerleap.data.userdata.UpdateProfileRequest
 import com.example.carrerleap.utils.Result
 
 class DataRepository(private val apiService: ApiService) {
@@ -35,6 +37,16 @@ class DataRepository(private val apiService: ApiService) {
         try {
             Log.d("TOKEN", token)
             val response = apiService.get_profile("Bearer $token")
+            emit(Result.Success(response))
+        }
+        catch(e: Exception){
+            emit(Result.Error(e.toString()))
+        }
+    }
+
+    fun updateProfile(token: String,data: UpdateProfileRequest): LiveData<Result<UpdateResponse>> = liveData {
+        try {
+            val response = apiService.updateProfile("Bearer $token",data)
             emit(Result.Success(response))
         }
         catch(e: Exception){

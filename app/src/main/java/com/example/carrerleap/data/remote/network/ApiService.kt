@@ -3,6 +3,8 @@ package com.example.carrerleap.data.remote.network
 import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
+import com.example.carrerleap.data.remote.response.UpdateResponse
+import com.example.carrerleap.data.userdata.UpdateProfileRequest
 import retrofit2.http.*
 
 interface ApiService {
@@ -24,7 +26,13 @@ interface ApiService {
 
     @GET("profile")
     suspend fun get_profile(
-        @Header("Authorization") authorization: String
+        @Header("Authorization") token: String
     ): ProfileResponse
+
+    @PUT("/profile")
+    suspend fun updateProfile(
+        @Header("Authorization") token: String,
+        @Body request: UpdateProfileRequest
+    ): UpdateResponse
 
 }

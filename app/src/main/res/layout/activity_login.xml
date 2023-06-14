@@ -139,5 +139,7 @@
         app:layout_constraintGuide_percent="0.25"
         app:layout_constraintStart_toStartOf="parent" />
 
+Dz
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

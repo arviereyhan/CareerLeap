@@ -16,8 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <com.example.carrerleap.ui.homescreen.ui.buttons.EditButton
-        android:id="@+id/editButton2"
+    <com.example.carrerleap.ui.homescreen.ui.buttons.LogoutButton
+        android:id="@+id/Logoutbutton"
         android:layout_width="129dp"
         android:layout_height="72dp"
         android:layout_marginEnd="64dp"
@@ -136,6 +136,10 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@id/textView_phonenumber"
         app:layout_constraintTop_toBottomOf="@+id/textView_phonenumber" />
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
