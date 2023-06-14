@@ -11,8 +11,10 @@ import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.QuestionsResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
+import com.example.carrerleap.data.remote.response.UpdateResponse
 import com.example.carrerleap.utils.Result
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class DataRepository(private val apiService: ApiService) {
 
@@ -60,6 +62,16 @@ class DataRepository(private val apiService: ApiService) {
         try {
             Log.d("TOKEN", token)
             val response = apiService.getJobs("Bearer $token")
+            emit(Result.Success(response))
+            }
+        catch(e: Exception){
+            emit(Result.Error(e.toString()))
+        }
+    }
+
+    fun updateProfile(token: String,full_name: RequestBody,date_of_birth: RequestBody, phonenumber: RequestBody, location: RequestBody,image:MultipartBody.Part): LiveData<Result<UpdateResponse>> = liveData {
+        try {
+            val response = apiService.updateProfile("Bearer $token",full_name,date_of_birth,phonenumber,location,image)
             emit(Result.Success(response))
         }
         catch(e: Exception){

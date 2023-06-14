@@ -8,9 +8,8 @@ import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import com.example.carrerleap.R
-import android.util.Log
 
-class EditButton : AppCompatButton {
+class LogoutButton: AppCompatButton {
 
     private lateinit var buttonBackground: Drawable
     private lateinit var buttonPencil: Drawable
@@ -34,9 +33,9 @@ class EditButton : AppCompatButton {
         setTextColor(txtColor)
         textSize = 12f
         gravity = Gravity.CENTER
-        canvas.drawText("EDIT PROFILE", (width/2f)-50f, 106.5f, paint)
+        canvas.drawText("LOGOUT", (width/2f)-30f, 106.5f, paint)
 
-        buttonPencil.setBounds(40, 60, 120, 130)
+        buttonPencil.setBounds(30, 60, 110, 130)
         buttonPencil.draw(canvas)
 
     }
@@ -44,6 +43,6 @@ class EditButton : AppCompatButton {
     private fun init() {
         txtColor = ContextCompat.getColor(context, android.R.color.white)
         buttonBackground = ContextCompat.getDrawable(context, R.drawable.bg_button) as Drawable
-        buttonPencil = ContextCompat.getDrawable(context,R.drawable.pensil_putih) as Drawable
+        buttonPencil = ContextCompat.getDrawable(context, R.drawable.logout_button) as Drawable
     }
 }

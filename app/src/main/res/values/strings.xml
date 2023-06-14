@@ -14,4 +14,7 @@
     <string name="title_home">Current Goal</string>
     <string name="title_profile">Profile</string>
     <string name="progress_kamu">PROGRESS KAMU</string>
+    <string name="not_available">Data Not Available</string>
+    <string name="default_pp">https://storage.googleapis.com/career-leap/careerLeap-default-profilePicture-9%20June%202023.png</string>
+
 </resources>

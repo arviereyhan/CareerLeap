@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_purple"
+    tools:context=".ui.homescreen.ui.editprofile.EditProfileActivity">
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.35" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.035" />
+
+  <TextView
+      android:id="@+id/textView_activity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Edit Profile"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="32sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile_image"
+      android:layout_width="94dp"
+      android:layout_height="95dp"
+      android:layout_marginTop="80dp"
+      android:src="@drawable/profile_default"
+      app:civ_border_color="#FFFFFF"
+      app:civ_border_width="2dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+
+  <ImageView
+      android:id="@+id/editprofileimagebutton"
+      android:layout_width="36dp"
+      android:layout_height="36dp"
+      android:scaleType="center"
+      android:src="@drawable/ic_camera"
+      app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+      app:layout_constraintEnd_toEndOf="@+id/profile_image"
+      app:layout_constraintStart_toStartOf="@+id/profile_image"
+      app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+
+  <TextView
+      android:id="@+id/desc_editprofile"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="116dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Profile Picture"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/desc_editname"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="204dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Name"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/textView_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="204dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Dzikri Ananda"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/editnamebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="203dp"
+      android:layout_marginEnd="8dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/edit_birthdate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="256dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="BirthDate"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/birthdate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="256dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="09/04/2002"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/editbirthdatebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="256dp"
+      android:layout_marginEnd="16dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editnamebutton"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/editnamebutton"
+      app:layout_constraintTop_toTopOf="parent" />
+
+
+  <TextView
+      android:id="@+id/edit_phonenumber"
+      android:layout_width="wrap_content"
+      android:layout_height="23dp"
+      android:layout_marginTop="312dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Phone Number"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/phonenumber"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="312dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="081289170653"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/editphonenumberbutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+
+      android:layout_marginTop="312dp"
+      android:layout_marginEnd="16dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editbirthdatebutton"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/editbirthdatebutton"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/edit_email"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="368dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Email"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/editemailbutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editphonenumberbutton"
+      app:layout_constraintStart_toStartOf="@+id/editphonenumberbutton"
+      app:layout_constraintTop_toBottomOf="@+id/editphonenumberbutton" />
+
+  <TextView
+      android:id="@+id/email"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="368dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Dzikri.785@gmail.com"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/edit_location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="424dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Location"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline2"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/location"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="424dp"
+      android:fontFamily="@font/inter_extra_bold"
+      android:text="Jakarta"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      app:layout_constraintStart_toEndOf="@id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <ImageView
+      android:id="@+id/editlocationbutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="29dp"
+      android:scaleType="center"
+      android:src="@drawable/pensil_putih"
+      app:layout_constraintEnd_toEndOf="@+id/editemailbutton"
+      app:layout_constraintStart_toStartOf="@+id/editemailbutton"
+      app:layout_constraintTop_toBottomOf="@+id/editemailbutton" />
+
+  <ImageView
+      android:id="@+id/savebutton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="44dp"
+      android:scaleType="center"
+      android:src="@drawable/baseline_save_100"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,7 @@ data class UserProfile(
 	val fullName: String? = null,
 
 	@field:SerializedName("profile_url")
-	val profileUrl: String? = null,
+	var profileUrl: String? = null,
 
 	@field:SerializedName("date_of_birth")
 	val dateOfBirth: String? = null,

@@ -12,16 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityRegisterBinding
 import com.example.carrerleap.ui.auth.login.LoginActivity
+import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
 import com.example.carrerleap.utils.ViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var registerViewModel: RegisterViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         setupView()
 
