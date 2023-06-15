@@ -55,11 +55,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.example.carrerleap.ui.custom_view.EmailEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_background"
+            android:paddingTop="25dp"
+            android:paddingBottom="10dp"
+            android:paddingHorizontal="15dp"
             android:ems="10"
             android:hint="Email Kamu"
             android:inputType="textEmailAddress"
@@ -93,10 +96,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.example.carrerleap.ui.custom_view.PasswordEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:paddingBottom="10dp"
+            android:paddingHorizontal="15dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
             android:hint="Password kamu"
