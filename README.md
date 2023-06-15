@@ -13,6 +13,7 @@ To measure the performance of our NLP classifier, we will be using accuracy as o
 
 ## Model Architecture
 ![job_classifier-removebg-preview](https://github.com/arviereyhan/CareerLeap/assets/88980651/7fa2532f-7164-4289-8b4d-a27ec9b3a2f7)
+![image](https://github.com/arviereyhan/CareerLeap/assets/88980651/fc321486-0075-49e3-8195-1c32333dd198)
 
 ### Component
 1. LSTM Layer
