@@ -11,7 +11,6 @@ import com.example.carrerleap.ui.choose.ChooseViewModel
 import com.example.carrerleap.ui.course.CourseViewModel
 import com.example.carrerleap.ui.homescreen.ui.home.HomeViewModel
 import com.example.carrerleap.ui.uploadcv.UploadCvViewModel
-import com.example.carrerleap.ui.homescreen.ui.editprofile.EditProfileViewModel
 import com.example.carrerleap.ui.homescreen.ui.profile.ProfileViewModel
 import com.example.carrerleap.ui.question.QuestionViewModel
 import com.example.carrerleap.ui.spash.SplashViewModel

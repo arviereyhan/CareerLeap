@@ -60,15 +60,7 @@ class DataRepository(private val apiService: ApiService, private val apiServiceM
         }
     }
 
-    fun updateProfile(token: String,full_name: RequestBody,date_of_birth: RequestBody, phonenumber: RequestBody, location: RequestBody,image:MultipartBody.Part): LiveData<Result<UpdateResponse>> = liveData {
-        try {
-            val response = apiService.updateProfile("Bearer $token",full_name,date_of_birth,phonenumber,location,image)
-            emit(Result.Success(response))
-        }
-        catch(e: Exception){
-            emit(Result.Error(e.toString()))
-        }
-    }
+
     
     fun getJobs(token : String): LiveData<Result<JobsResponse>> = liveData{
         try {

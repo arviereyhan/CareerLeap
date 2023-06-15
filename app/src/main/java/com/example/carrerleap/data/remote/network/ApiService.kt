@@ -7,7 +7,6 @@ import com.example.carrerleap.data.remote.response.LoginResponse
 import com.example.carrerleap.data.remote.response.ProfileResponse
 import com.example.carrerleap.data.remote.response.QuestionsResponse
 import com.example.carrerleap.data.remote.response.RegisterResponse
-import okhttp3.RequestBody
 import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -65,16 +64,7 @@ interface ApiService {
         @Header("Authorization") token: String
     ): ProfileResponse
 
-    @PUT("/profile")
-    @Multipart
-    suspend fun updateProfile(
-        @Header("Authorization") token: String,
-        @Part("full_name") fullName: RequestBody,
-        @Part("date_of_birth") dateOfBirth: RequestBody,
-        @Part("phone_number") phoneNumber: RequestBody,
-        @Part("location") location: RequestBody,
-        @Part file_profile: MultipartBody.Part,
-    ): UpdateResponse
+
     @GET("jobs")
     suspend fun getJobs(
         @Header("Authorization") token: String
