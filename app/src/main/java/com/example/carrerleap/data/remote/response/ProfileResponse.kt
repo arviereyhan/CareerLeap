@@ -44,5 +44,5 @@ data class UserProfile(
 	val email: String? = null,
 
 	@field:SerializedName("job_id")
-	val job: String? = null
+	val jobId: Int? = null
 )

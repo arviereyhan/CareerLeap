@@ -9,10 +9,8 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityLoginBinding
 import com.example.carrerleap.ui.homescreen.HomeScreenActivity
-import com.example.carrerleap.ui.main.MainActivity
 import com.example.carrerleap.ui.uploadcv.UploadCvActivity
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
@@ -44,9 +42,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             processLogin()
         }
-
-
-
     }
 
     private fun processLogin() {
@@ -68,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                         is Result.Success -> {
                             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
                             val data = it.data
-                            val intent = Intent(this, HomeScreenActivity::class.java)
+                            val intent = Intent(this, UploadCvActivity::class.java)
                             val loginModel = UserModel(
                                 token = data.loginResult.token
                             )
@@ -90,7 +85,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun setupView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

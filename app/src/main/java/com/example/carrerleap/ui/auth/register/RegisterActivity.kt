@@ -37,8 +37,6 @@ class RegisterActivity : AppCompatActivity() {
             processRegister()
         }
 
-
-
     }
 
     private fun processRegister() {

@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">Carrer Leap</string>
+    <string name="nama">Nama</string>
+    <string name="location">Location</string>
+    <string name="birthdate">14 agustus 2002</string>
+    <string name="title_question_page">Berikan penilaian kemampuan kamu untuk pekerjaan yang kamu pilih!</string>
+    <string name="pertanyaan">PERTANYAAN</string>
+    <string name="option_1">Tidak bisa sama sekali</string>
+    <string name="option_2">Hanya sekedar mengetahui</string>
+    <string name="option_3">Sedikit menguasai</string>
+    <string name="option_4">Lumayan Menguasai</string>
+    <string name="option_5">Sangat menguasai</string>
     <string name="title_activity_home_screen">HomeScreenActivity</string>
     <string name="title_home">Current Goal</string>
     <string name="title_profile">Profile</string>
     <string name="not_available">Data Not Available</string>
     <string name="default_pp">https://storage.googleapis.com/career-leap/careerLeap-default-profilePicture-9%20June%202023.png</string>
 
+    <string name="progress_kamu">PROGRESS KAMU</string>
 </resources>

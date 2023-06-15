@@ -19,6 +19,12 @@
             android:name=".ui.homescreen.ui.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.choose.ChooseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.question.QuestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.homescreen.HomeScreenActivity"
             android:exported="false"
             android:label="@string/title_activity_home_screen" />

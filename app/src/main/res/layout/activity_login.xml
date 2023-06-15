@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/inter_extra_bold"
-        android:text="LOGIN"
+        android:text="LOGIN DULU YUK "
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="22sp"
