@@ -24,6 +24,9 @@ import com.example.carrerleap.utils.ViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 import com.bumptech.glide.Glide
+import com.example.carrerleap.ui.auth.LoginRegisterActivity
+import com.example.carrerleap.utils.Job
+import java.io.File
 
 
 class ProfileFragment : Fragment() {
@@ -31,6 +34,8 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
 
     private val binding get() = _binding!!
+    private var jobs: List<Job>? = null
+    private var relatedJobs: List<Job>? = null
     private lateinit var preferences: Preferences
     private lateinit var userModel: UserModel
     private  lateinit var token: String
@@ -50,6 +55,7 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        fullScreen()
 
         preferences = Preferences(requireContext())
 
@@ -73,9 +79,23 @@ class ProfileFragment : Fragment() {
 
         }
 
-        binding.Logoutbutton.setOnClickListener {  }
+        binding.Logoutbutton.setOnClickListener {
+            preferences.logout()
+            val intent = Intent(context, LoginRegisterActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
 
         return root
+    }
+
+    private fun fullScreen() {
+        requireActivity().window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                )
+        requireActivity().actionBar?.hide()
     }
 
 
@@ -135,11 +155,11 @@ class ProfileFragment : Fragment() {
                         binding.textViewPhonenumber.text = it.data.userProfile?.phoneNumber
                     }
 
-                    if(it.data.userProfile?.job== null){
+                    if(it.data.userProfile?.jobId== null){
                         binding.textViewCareer.text = "Career is empty"
                     }
                     else {
-                        binding.textViewCareer.text = it.data.userProfile?.job
+                        getJobs(it.data.userProfile?.jobId)
                     }
                     Log.i("kinerja","1")
 
@@ -162,7 +182,7 @@ class ProfileFragment : Fragment() {
                         it.data.userProfile?.phoneNumber,
                         it.data.userProfile?.email,
                         it.data.userProfile?.location,
-                        it.data.userProfile?.job
+                        it.data.userProfile?.jobId.toString()
                     )
                     isLoaded = true
                     Log.i("isloaded",isLoaded.toString())
@@ -173,6 +193,28 @@ class ProfileFragment : Fragment() {
                 }
                 is Result.Error -> {
                     Toast.makeText(requireContext(), it.error, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun getJobs(jobId: Int) {
+        profileViewModel.getJobs(token).observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Success -> {
+                    val dataJob = result.data
+                    jobs = dataJob.data.map {
+                        Job(
+                            id = it.id,
+                            jobName = it.job_name
+                        )
+                    }
+                    relatedJobs = jobs?.filter { it.id == jobId }
+                    val jobNames = relatedJobs?.joinToString(", ") { it.jobName }
+                    binding.textViewCareer.text = jobNames
+                }
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                 }
             }
         }

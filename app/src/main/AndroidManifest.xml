@@ -19,6 +19,9 @@
             android:name=".ui.homescreen.ui.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.course.CourseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.choose.ChooseActivity"
             android:exported="false" />
         <activity

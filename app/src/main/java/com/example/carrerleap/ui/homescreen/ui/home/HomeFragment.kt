@@ -1,5 +1,6 @@
 package com.example.carrerleap.ui.homescreen.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.carrerleap.databinding.FragmentHomeBinding
+import com.example.carrerleap.ui.course.CourseActivity
 import com.example.carrerleap.utils.Job
 import com.example.carrerleap.utils.ListHomeItem
 import com.example.carrerleap.utils.Preferences
@@ -28,6 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var preferences: Preferences
     private var jobs: List<Job>? = null
+    private val userAnswers: ArrayList<Int> = ArrayList()
     private var userId: Int = 0
     private var selectionJobsId: Int = 0
     private lateinit var userModel: UserModel
@@ -38,6 +41,8 @@ class HomeFragment : Fragment() {
     private var selectionUserId : Int = 0
     private var relatedQuestions: List<Question>? = null
     private var questions: List<Question>? = null
+    private var questionsId: Int = 0
+    private var userScore: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +56,7 @@ class HomeFragment : Fragment() {
         )[HomeViewModel::class.java]
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        setupView()
 
         preferences = Preferences(requireContext())
         layoutManager = LinearLayoutManager(requireContext())
@@ -67,7 +73,6 @@ class HomeFragment : Fragment() {
         getProfile()
         setRecycleView()
 
-        binding.rvHome.adapter = homeAdapter
         Log.d("selection user Id", selectionUserId.toString())
 
         return root
@@ -90,11 +95,14 @@ class HomeFragment : Fragment() {
                             id = it?.id!!,
                             question = it.question!!,
                             jobId = it.jobId!!
+
                         )
                     }
                     if (selectionJobsId != null) {
                         relatedQuestions = questions?.filter { it.jobId == selectionJobsId }
                         homeAdapter.updateRelatedQuestions(relatedQuestions)
+
+                        getHomeData()
                     } else {
                         // Pekerjaan yang dipilih tidak ditemukan
                     }
@@ -105,33 +113,77 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
 
-        viewModel.getHome(token).observe(viewLifecycleOwner){
-            when (it) {
+    private fun setupView() {
+        requireActivity().window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                )
+        requireActivity().actionBar?.hide()
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingState.visibility = View.VISIBLE
+        } else {
+            binding.loadingState.visibility = View.GONE
+        }
+    }
+
+    private fun getHomeData() {
+        viewModel.getHome(token).observe(viewLifecycleOwner) { homeResult ->
+            when (homeResult) {
                 is Result.Success -> {
-                    val data = it.data
+                    val data = homeResult.data
                     val scoreList = data.data?.mapNotNull { scoreItem ->
                         val score = scoreItem?.score
+                        userScore = scoreItem.score
+                        userAnswers.add(score!!)
                         val skill = when (score) {
                             1 -> "Tidak bisa sama sekali"
-                            2 -> "Sangat kurang"
-                            3 -> "Kurang"
-                            4 -> "Cukup"
-                            5 -> "Sangat memahami"
+                            2 -> "Hanya sekedar mengetahui"
+                            3 -> "Sedikit menguasai"
+                            4 -> "Lumayan Menguasai"
+                            5 -> "Sangat menguasai"
                             else -> null
                         }
                         if (skill != null) {
-                            ListHomeItem(scoreItem?.id!!.toInt(), skill)
+                            ListHomeItem(scoreItem?.id!!.toInt(), skill,scoreItem?.questionId!!.toInt(), score )
                         } else {
                             null
                         }
-                    }
-                    homeAdapter.submitList(scoreList)
 
+                    }
+
+                    homeAdapter.submitList(scoreList)
+                    showLoading(false)
+                    homeAdapter.setRecommendationClickListener {
+                        val intent = Intent(activity, CourseActivity::class.java)
+                        intent.putExtra(CourseActivity.QUESTION_ID, it.questionId)
+                        intent.putExtra(CourseActivity.USER_SCORE, it.score)
+                        intent.putExtra(CourseActivity.JOBS_ID, selectionJobsId)
+                        requireActivity().startActivity(intent)
+                    }
+
+                    binding.rvHome.adapter = homeAdapter
+                    var score = userAnswers.toIntArray()
+                    var size = score.size * 5
+                    Log.d("size", size.toString())
+                    val total = score.sum().toFloat() // Jumlahkan semua nilai dan ubah ke tipe Float
+                    val combinedPercentage = (total / size) * 100// Bagi jumlah persentase dengan jumlah elemen
+                    Log.d("percentages", combinedPercentage.toString())
+
+                    printIntArray(score)
+
+                    binding.progressBar.progress = combinedPercentage.toInt()
+                    binding.progressBar.max = 100
+                    binding.tvProgressPercent.text = String.format("%.0f%%", combinedPercentage)
                 }
                 is Result.Error -> {
-                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
-                    Log.i("tastos", it.error)
+                    Toast.makeText(requireContext(), homeResult.error, Toast.LENGTH_SHORT).show()
+                    Log.i("tastos", homeResult.error)
                 }
             }
         }
@@ -141,6 +193,7 @@ class HomeFragment : Fragment() {
         viewModel.getProfile(token).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Success -> {
+                    showLoading(true)
                     val tempImg =
                         "https://storage.googleapis.com/career-leap/careerLeap-default-profilePicture-9%20June%202023.png"
                     val data = result.data
@@ -164,18 +217,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        var score = preferences.getJobs().score
-        var size = score?.size!! * 5
-        Log.d("size", size.toString())
-        val total = score.sum().toFloat() // Jumlahkan semua nilai dan ubah ke tipe Float
-        val combinedPercentage = (total / size) * 100// Bagi jumlah persentase dengan jumlah elemen
-        Log.d("percentages", combinedPercentage.toString())
-
-        printIntArray(score)
-
-        binding.progressBar.progress = combinedPercentage.toInt()
-        binding.progressBar.max = 100
-        binding.tvProgressPercent.text = String.format("%.0f%%", combinedPercentage)
     }
 
     private fun getJobs(jobId: Int) {

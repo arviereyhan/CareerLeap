@@ -18,6 +18,7 @@ class HomeAdapter : ListAdapter<ListHomeItem, HomeAdapter.ViewHolder>(DIFF_CALLB
 
     private var relatedQuestions: List<Question>? = null
 
+
     fun updateRelatedQuestions(questions: List<Question>?) {
         relatedQuestions = questions
         notifyDataSetChanged()
@@ -25,7 +26,7 @@ class HomeAdapter : ListAdapter<ListHomeItem, HomeAdapter.ViewHolder>(DIFF_CALLB
 
     inner class ViewHolder(private val binding: ItemRowHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(dataTwo: Question,data: ListHomeItem, listener: ((ListHomeItem) -> Unit)?) {
+        fun bind(dataTwo: Question, data: ListHomeItem, listener: ((ListHomeItem) -> Unit)?) {
             binding.apply {
                 tvQuestion.text = dataTwo.question
                 tvScore.text = data.skill

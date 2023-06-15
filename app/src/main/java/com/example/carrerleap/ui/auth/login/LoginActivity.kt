@@ -5,12 +5,15 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.carrerleap.databinding.ActivityLoginBinding
+import com.example.carrerleap.ui.choose.ChooseActivity
 import com.example.carrerleap.ui.homescreen.HomeScreenActivity
+import com.example.carrerleap.ui.question.QuestionActivity
 import com.example.carrerleap.ui.uploadcv.UploadCvActivity
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
@@ -22,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var preferences: Preferences
     private lateinit var userModel: UserModel
+    private var token: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -33,14 +37,23 @@ class LoginActivity : AppCompatActivity() {
             viewModelFactory
         )[LoginViewModel::class.java]
         preferences = Preferences(this)
-
         userModel = preferences.getToken()
+
+
 
         setupView()
         loginHandler()
 
         binding.btnLogin.setOnClickListener {
             processLogin()
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 
@@ -61,9 +74,9 @@ class LoginActivity : AppCompatActivity() {
                 else -> {
                     when(it){
                         is Result.Success -> {
+                            showLoading(true)
                             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
                             val data = it.data
-                            val intent = Intent(this, UploadCvActivity::class.java)
                             val loginModel = UserModel(
                                 token = data.loginResult.token
                             )
@@ -72,9 +85,45 @@ class LoginActivity : AppCompatActivity() {
 
 
                             preferences.saveToken(loginModel)
-                            intent.putExtra(EXTRA_TOKEN, data.loginResult.token)
-                            startActivity(intent)
-                            finish()
+                            userModel = preferences.getToken()
+                            token = userModel.token.toString()
+                            loginViewModel.getProfile(token).observe(this){
+                                when(it) {
+                                    is Result.Success -> {
+                                        if (it.data.userProfile?.cvUrl == null){
+                                            val intent = Intent(this, UploadCvActivity::class.java)
+                                            startActivity(intent)
+                                            finish()
+                                        }else if(it.data.userProfile?.cvUrl != null && it.data.userProfile.jobId == null){
+                                            val intent = Intent(this, ChooseActivity::class.java)
+                                            startActivity(intent)
+                                            finish()
+                                        }else if (it.data.userProfile?.cvUrl != null && it.data.userProfile.jobId != null ){
+                                            loginViewModel.getScore(token).observe(this){
+                                                when (it){
+                                                    is Result.Success -> {
+                                                        if(it.data.data == null){
+                                                            val intent = Intent(this, QuestionActivity::class.java)
+                                                            startActivity(intent)
+                                                            finish()
+                                                        }else if (it.data.data != null){
+                                                            val intent = Intent(this, HomeScreenActivity::class.java)
+                                                            startActivity(intent)
+                                                            finish()
+                                                        }
+                                                    }
+                                                    is Result.Error -> {
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    is Result.Error -> {
+
+                                    }
+                                }
+                            }
                         }
                         is Result.Error -> {
                             Toast.makeText(this@LoginActivity, it.error, Toast.LENGTH_LONG).show()

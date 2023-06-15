@@ -1,5 +1,6 @@
 package com.example.carrerleap.data.remote.network
 
+import com.example.carrerleap.data.remote.response.CourseResponse
 import com.example.carrerleap.data.remote.response.HomeResponse
 import com.example.carrerleap.data.remote.response.JobsResponse
 import com.example.carrerleap.data.remote.response.LoginResponse
@@ -16,6 +17,8 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import java.io.File
+import com.example.carrerleap.data.remote.response.UpdateResponse
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -86,5 +89,23 @@ interface ApiService {
     suspend fun getHome(
         @Header("Authorization") token: String
     ): HomeResponse
+
+    @GET("getCourses")
+    suspend fun getCourse(
+        @Query ("questionId") questionId: Int,
+        @Query ("userScore") userScore: Int,
+        @Query ("jobId") jobId: Int,
+        @Header("Authorization") token: String
+    ): CourseResponse
+    @PUT("/profile")
+    @Multipart
+    suspend fun updateProfile(
+        @Header("Authorization") token: String,
+        @Part("full_name") fullName: RequestBody,
+        @Part("date_of_birth") dateOfBirth: RequestBody,
+        @Part("phone_number") phoneNumber: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part file_profile: MultipartBody.Part,
+    ): UpdateResponse
 
 }

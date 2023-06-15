@@ -1,7 +1,12 @@
 package com.example.carrerleap.ui.choose
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -11,6 +16,7 @@ import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityChooseBinding
 import com.example.carrerleap.ui.question.QuestionActivity
 import com.example.carrerleap.utils.JobsModel
+import com.example.carrerleap.utils.PredictModel
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
 import com.example.carrerleap.utils.UserModel
@@ -24,14 +30,16 @@ class ChooseActivity : AppCompatActivity() {
     private lateinit var jobsModel: JobsModel
     private lateinit var userModel: UserModel
     private var token: String = ""
+    private var predict: String = ""
+    private lateinit var predictModel: PredictModel
     private lateinit var viewModel: ChooseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupView()
 
-        preferences = Preferences(this)
         val viewModelFactory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(
             this@ChooseActivity,
@@ -41,10 +49,35 @@ class ChooseActivity : AppCompatActivity() {
 
         jobsModel = preferences.getJobs()
         userModel = preferences.getToken()
+        predictModel = preferences.getPredict()
         token = userModel.token.toString()
+        predict = predictModel.predict.toString()
+
+        binding.tvRekomendasiJobs.text = predict
+        Log.d("hasil predik", predict)
 
         questionHandler()
         jobs()
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingState.visibility = View.VISIBLE
+        } else {
+            binding.loadingState.visibility = View.GONE
+        }
+    }
+
+    private fun setupView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 
     private fun jobs(){
@@ -56,6 +89,7 @@ class ChooseActivity : AppCompatActivity() {
                     showJobs(jobs)
                     binding.btnToQuestion.setOnClickListener {
                         if (selectedItem != null){
+                            showLoading(true)
                             val selectedJob = selectedItem // Pekerjaan yang dipilih dari dropdown
                             val selectedJobId = data.data.find { it.job_name == selectedJob }?.id
                             val intent = Intent(this@ChooseActivity, QuestionActivity::class.java)
@@ -114,5 +148,9 @@ class ChooseActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    companion object{
+        const val EXTRA_PREDICT = "extra_predict"
     }
 }

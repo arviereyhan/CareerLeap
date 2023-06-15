@@ -28,7 +28,7 @@ class LoginRegisterActivity : AppCompatActivity() {
         userModel = preferences.getToken()
 
         setupView()
-        loginHandler()
+//        loginHandler()
 
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this@LoginRegisterActivity, LoginActivity::class.java)
@@ -54,13 +54,13 @@ class LoginRegisterActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun loginHandler(){
-        if (userModel.token != null) {
-            startActivity(Intent(this, UploadCvActivity::class.java).also {
-                finish()
-            })
-
-        }
-    }
+//    private fun loginHandler(){
+//        if (userModel.token != null) {
+//            startActivity(Intent(this, UploadCvActivity::class.java).also {
+//                finish()
+//            })
+//
+//        }
+//    }
 
 }

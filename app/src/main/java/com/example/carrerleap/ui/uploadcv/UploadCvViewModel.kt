@@ -10,5 +10,6 @@ class UploadCvViewModel(private val repository: DataRepository): ViewModel() {
 
     fun postCv(file: MultipartBody.Part, token: String) = repository.uploadCv(file, token)
 
+    fun getPredict(cvUrl: String) = repository.getPredict(cvUrl)
     fun getProfile(token: String) = repository.getProfile(token)
 }

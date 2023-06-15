@@ -7,27 +7,27 @@ import kotlinx.parcelize.Parcelize
 data class HomeResponse(
 
 	@field:SerializedName("data")
-	val data: List<HomeItem?>? = null,
+	val data: List<HomeItem>,
 
 	@field:SerializedName("error")
-	val error: Boolean? = null,
+	val error: Boolean ,
 
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String
 )
 
 @Parcelize
 data class HomeItem(
 
-	@field:SerializedName("score")
-	val score: Int? = null,
-
 	@field:SerializedName("user_id")
-	val userId: Int? = null,
+	val userId: Int,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
+
+	@field:SerializedName("score")
+	val score: Int,
 
 	@field:SerializedName("question_id")
-	val questionId: Int? = null
+	val questionId: Int
 ):Parcelable

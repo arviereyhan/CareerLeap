@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -39,6 +40,14 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingState.visibility = View.VISIBLE
+        } else {
+            binding.loadingState.visibility = View.GONE
+        }
+    }
+
     private fun processRegister() {
         val name = binding.usernameEditText.text.toString()
         val email = binding.emailEditText.text.toString()
@@ -63,6 +72,7 @@ class RegisterActivity : AppCompatActivity() {
                 else -> {
                     when(it){
                         is Result.Success -> {
+                            showLoading(true)
                             Toast.makeText(this@RegisterActivity, "Registrasi Berhasil", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this, LoginActivity::class.java)
                             startActivity(intent)
