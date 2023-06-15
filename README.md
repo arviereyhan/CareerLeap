@@ -4,21 +4,28 @@ This project focuses on building a natural language processing (NLP) system usin
 ## Problem Understanding
 
 ## Dataset
-To train and evaluate our NLP classifier, we will be using a dataset sourced from Kaggle. Kaggle provides a vast collection of datasets, and we have selected a suitable dataset that aligns with our problem understanding. The dataset will consist of labeled text samples and their corresponding categories or labels.
+The dataset used for this project is sourced from Kaggle and consists of resumes for various job positions. The original dataset contains 962 entries with information on 25 different job positions. However, for this specific project, we have focused on six specific job positions:
+- Business Analyst
+- Data Science
+- Java Developer
+- Operations Manager
+- Web Designing
+- DevOps Engineer
 
+We have filtered the original dataset and extracted a subset of 292 entries that correspond to these six job positions. This subset will be used for analysis, modeling, and any further tasks related to this project.
 
+https://www.kaggle.com/datasets/gauravduttakiit/resume-dataset
 
 ## Metrics
 To measure the performance of our NLP classifier, we will be using accuracy as our evaluation metric. Accuracy represents the percentage of correctly classified instances out of the total number of instances.
 
 ## Model Architecture
 ![job_classifier-removebg-preview](https://github.com/arviereyhan/CareerLeap/assets/88980651/7fa2532f-7164-4289-8b4d-a27ec9b3a2f7)
-![image](https://github.com/arviereyhan/CareerLeap/assets/88980651/fc321486-0075-49e3-8195-1c32333dd198)
 
 ### Component
 1. LSTM Layer
 The LSTM (Long Short-Term Memory) layer is a type of recurrent neural network layer that excels at capturing dependencies and patterns in sequential data. It is well-suited for tasks involving time series, natural language processing, and other sequential data analysis. The LSTM layer in our model helps the network learn long-term dependencies and maintain memory of past inputs. In our model, we use LSTM layer with 32 filters.
-. 
+
 2. Dense Layer
 Following the LSTM layer, we have three Dense layers. Dense layers, also known as fully connected layers, are responsible for learning non-linear relationships between the features extracted from the input data. Each Dense layer consists of a set of neurons that receive input from all the neurons in the previous layer.
 
