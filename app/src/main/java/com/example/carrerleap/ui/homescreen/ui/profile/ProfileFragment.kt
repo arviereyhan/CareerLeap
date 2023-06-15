@@ -26,6 +26,7 @@ import java.util.*
 import com.bumptech.glide.Glide
 import com.example.carrerleap.ui.auth.LoginRegisterActivity
 import com.example.carrerleap.utils.Job
+import java.io.File
 
 
 class ProfileFragment : Fragment() {
@@ -218,5 +219,6 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
 
 }

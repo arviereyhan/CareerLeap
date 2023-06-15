@@ -27,6 +27,12 @@ internal class Preferences(context: Context) {
         editor.apply()
     }
 
+    fun savePredict(data: PredictModel){
+        val editor = preferences.edit()
+        editor.putString(FILE, data.predict)
+        editor.apply()
+    }
+
     fun saveJobs(data: JobsModel) {
         val editor = preferences.edit()
         editor.putInt(JOBS, data.jobsId!!)
@@ -49,6 +55,11 @@ internal class Preferences(context: Context) {
         return CvModel(fileCv)
     }
 
+    fun getPredict(): PredictModel {
+        val predict = preferences.getString(FILE, null)
+        return PredictModel(predict)
+    }
+
     fun getToken(): UserModel {
         val token = preferences.getString(TOKEN, null)
         return UserModel(token)
@@ -64,4 +75,8 @@ internal class Preferences(context: Context) {
 
 data class CvModel(
     var fileCv : String? = null
+)
+
+data class PredictModel(
+    var predict : String? = null
 )

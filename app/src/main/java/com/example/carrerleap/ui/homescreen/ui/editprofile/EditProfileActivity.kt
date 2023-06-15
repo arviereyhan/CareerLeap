@@ -49,7 +49,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var userModel: UserModel
     private lateinit var token: String
     private lateinit var formatteddate: String
-    private lateinit var fileImage: File
+    private var fileImage: File? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
@@ -95,7 +95,7 @@ class EditProfileActivity : AppCompatActivity() {
                 Toast.makeText(this,"Uncompleted Field! Please Fill All Field!",Toast.LENGTH_LONG).show()
             }
             else{
-                UpdateProfile(token,userData.name!!,formatDate(userData.birthdate!!),userData.phonenumber!!,userData.location!!,fileImage)
+                UpdateProfile(token,userData.name!!,formatDate(userData.birthdate!!),userData.phonenumber!!,userData.location!!)
             }
         }
     }
@@ -248,7 +248,8 @@ class EditProfileActivity : AppCompatActivity() {
         return outputFormat.format(date)
     }
 
-    fun UpdateProfile(token: String, name: String,dateofbirth: String,phonenumber: String,location:String,image: File){
+    fun UpdateProfile(token: String, name: String,dateofbirth: String,phonenumber: String,location:String){
+        val image = reduceFileImage(fileImage as File)
         val mediaType = "text/plain".toMediaTypeOrNull()
         val fullNamePart = RequestBody.create(mediaType, name)
         val dateOfBirthPart = RequestBody.create(mediaType, dateofbirth)
@@ -304,6 +305,10 @@ class EditProfileActivity : AppCompatActivity() {
             e.printStackTrace()
             null
         }
+    }
+
+    private fun reduceFileImage(file: File): File {
+        return file
     }
 
 

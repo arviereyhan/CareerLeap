@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.WindowInsets
@@ -16,6 +18,7 @@ import com.example.carrerleap.R
 import com.example.carrerleap.databinding.ActivityUploadCvBinding
 import com.example.carrerleap.ui.choose.ChooseActivity
 import com.example.carrerleap.utils.CvModel
+import com.example.carrerleap.utils.PredictModel
 import com.example.carrerleap.utils.Preferences
 import com.example.carrerleap.utils.Result
 import com.example.carrerleap.utils.UserModel
@@ -35,7 +38,10 @@ class UploadCvActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadCvBinding
     private lateinit var viewModel: UploadCvViewModel
     private lateinit var cvModel: CvModel
+    private var textOutput: String = ""
     private var isCv: String = ""
+    private var cvUrl: String = ""
+    private var predict: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,15 +113,47 @@ class UploadCvActivity : AppCompatActivity() {
                         preferences.saveFile(uploadModel)
                         Toast.makeText(this, "File uploaded successfully", Toast.LENGTH_SHORT).show()
                         Log.i("UploadCvActivity", "Navigating to ChooseActivity")
-                        val intent = Intent(this@UploadCvActivity, ChooseActivity::class.java)
-                        startActivity(intent)
-                        finish()
                     }
                     is Result.Error -> {
                         Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                viewModel.getProfile(token).observe(this){
+                    when(it){
+                        is Result.Success -> {
+                            cvUrl = it.data.userProfile?.cvUrl.toString()
+                            viewModel.getPredict(cvUrl).observe(this){
+                                when (it) {
+                                    is Result.Success -> {
+                                        predict = it.data.hasilPrediksi.toString()
+                                        val dataPredict = PredictModel(
+                                            it.data.hasilPrediksi
+                                        )
+                                        preferences.savePredict(dataPredict)
+                                        textOutput = it.data.textOutput.toString()
+                                        Log.d("predict temp", predict)
+                                        val intent = Intent(this@UploadCvActivity, ChooseActivity::class.java)
+                                        intent.putExtra(ChooseActivity.EXTRA_PREDICT, predict)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    is Result.Error -> {
+                                        Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        }
+                        is Result.Error -> {
+                            Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                Log.d("cv_url", cvUrl)
+
+            }, 3000)
         } else{
             Toast.makeText(this@UploadCvActivity, "Silakan masukkan berkas CV terlebih dahulu.", Toast.LENGTH_SHORT).show()
         }
