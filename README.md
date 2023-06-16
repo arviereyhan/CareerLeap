@@ -5,16 +5,13 @@ Service that we use : App Enginge, Cloud SQL, Google Storage, Cloud Build.
  With Express.js, developers can easily add authentication, validation, and error handling to their APIs. It also supports various response formats like JSON or XML. 
  Overall, Express.js makes it easier to create simple, scalable, and secure REST APIs.
  
-API Career Leap 
-
-BASE URL : 
-https://careerleap.as.r.appspot.com/
-
-Register
-URL 
-/register
-Method 
-POST
+ API Career Leap 
+ BASE URL : 
+ https://careerleap.as.r.appspot.com/
+ 
+ Register
+ URL : /register
+Method : POST
 Request Body 
 email as string, unique,
 password as string, must be at least 6 characters,
