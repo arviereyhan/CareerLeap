@@ -2,6 +2,8 @@ package com.example.carrerleap.ui.homescreen.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -71,9 +73,14 @@ class HomeFragment : Fragment() {
         homeAdapter = HomeAdapter()
 
         getProfile()
-        setRecycleView()
-
-        Log.d("selection user Id", selectionUserId.toString())
+        if (selectionJobsId == 0){
+            Handler(Looper.getMainLooper()).postDelayed({
+                Log.d("selection user Id", selectionJobsId.toString())
+                setRecycleView()
+            }, 3000)
+        }else {
+            setRecycleView()
+        }
 
         return root
     }
@@ -101,8 +108,8 @@ class HomeFragment : Fragment() {
                     if (selectionJobsId != null) {
                         relatedQuestions = questions?.filter { it.jobId == selectionJobsId }
                         homeAdapter.updateRelatedQuestions(relatedQuestions)
-
                         getHomeData()
+
                     } else {
                         // Pekerjaan yang dipilih tidak ditemukan
                     }

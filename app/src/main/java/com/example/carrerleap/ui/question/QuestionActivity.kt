@@ -3,6 +3,8 @@ package com.example.carrerleap.ui.question
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.WindowInsets
@@ -80,11 +82,22 @@ class QuestionActivity : AppCompatActivity() {
                             jobId = it.jobId!!
                         )
                     }
-                    if (selectedOptionId != null) {
-                        relatedQuestions = questions?.filter { it.jobId == selectedOptionId }
-                        showQuestion(currentQuestionIndex)
+                    if (selectedOptionId == 0) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            if (selectedOptionId != null) {
+                                relatedQuestions = questions?.filter { it.jobId == selectedOptionId }
+                                showQuestion(currentQuestionIndex)
+                            } else {
+                                // Pekerjaan yang dipilih tidak ditemukan
+                            }
+                        }, 2000)
                     } else {
-                        // Pekerjaan yang dipilih tidak ditemukan
+                        if (selectedOptionId != null) {
+                            relatedQuestions = questions?.filter { it.jobId == selectedOptionId }
+                            showQuestion(currentQuestionIndex)
+                        } else {
+                            // Pekerjaan yang dipilih tidak ditemukan
+                        }
                     }
                 }
 

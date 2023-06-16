@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupView()
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
         loginViewModel = ViewModelProvider(
@@ -39,10 +40,6 @@ class LoginActivity : AppCompatActivity() {
         preferences = Preferences(this)
         userModel = preferences.getToken()
 
-
-
-        setupView()
-        loginHandler()
 
         binding.btnLogin.setOnClickListener {
             processLogin()
@@ -126,7 +123,9 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
                         is Result.Error -> {
-                            Toast.makeText(this@LoginActivity, it.error, Toast.LENGTH_LONG).show()
+                            if (it.error == "retrofit2.HttpException: HTTP 401 "){
+                                Toast.makeText(this@LoginActivity, "incorrect email or password", Toast.LENGTH_LONG).show()
+                            }
                         }
 
                     }
@@ -152,7 +151,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, HomeScreenActivity::class.java).also {
                 finish()
             })
-
         }
     }
 

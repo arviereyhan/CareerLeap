@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -25,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         setupView()
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
@@ -37,7 +37,6 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             processRegister()
         }
-
     }
 
     private fun showLoading(state: Boolean) {
@@ -79,9 +78,11 @@ class RegisterActivity : AppCompatActivity() {
                             finish()
                         }
                         is Result.Error -> {
-                            Toast.makeText(this@RegisterActivity, it.error, Toast.LENGTH_LONG).show()
+                            Log.d("error", it.error)
+                            if (it.error == "retrofit2.HttpException: HTTP 409 "){
+                                Toast.makeText(this@RegisterActivity, "Email already exists", Toast.LENGTH_LONG).show()
+                            }
                         }
-
                     }
                 }
             }
