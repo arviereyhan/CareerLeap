@@ -1,4 +1,4 @@
-# Machine Learning
+# Machine Learning Part - CareerLeap
 This project focuses on building a natural language processing (NLP) system using Tensorflow. The goal is create model that can accurately recommend text data into predefined job. Dion and I focus on building Machine Learning Model for this project.
 
 My Team's Github Link: https://github.com/arviereyhan/CareerLeap/tree/ML
