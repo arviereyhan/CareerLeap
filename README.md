@@ -1,5 +1,6 @@
 # Machine Learning
 This project focuses on building a natural language processing (NLP) system using Tensorflow. The goal is create model that can accurately recommend text data into predefined job.
+Ref: https://github.com/arviereyhan/CareerLeap/tree/ML
 
 ## Problem Understanding
 
